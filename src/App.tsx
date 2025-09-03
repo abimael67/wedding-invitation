@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Calendar,
   MapPin,
@@ -9,7 +9,38 @@ import {
   Mail,
 } from "lucide-react";
 
+// Custom hook for scroll animation
+const useScrollAnimation = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return [ref, isVisible] as const;
+};
+
 function App() {
+  const [countdownRef, isCountdownVisible] = useScrollAnimation();
+  const [venueRef, isVenueVisible] = useScrollAnimation();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -257,10 +288,20 @@ function App() {
       </section>
 
       {/* Countdown Section */}
-      <section className="py-16 px-4 bg-wedding-blue-900 text-white overflow-x-hidden relative">
+      <section 
+        ref={countdownRef}
+        className={`py-16 px-4 bg-wedding-blue-900 text-white overflow-x-hidden relative fade-in-section ${
+          isCountdownVisible ? 'visible' : ''
+        }`}
+      >
+        <img
+          src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/separator%201.png"
+          alt="Separator"
+          className="w-[20rem] h-auto object-cover mx-auto -mt-[7rem] -mb-8"
+        />
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex flex-row justify-center items-center car-drag-animation overflow-hidden">
-            <div className="mb-12">
+            <div className="mb-2">
               {/* Minimalistic Sign */}
               <div className="bg-vintage-cream border-2 border-wedding-blue-300 rounded-lg shadow-lg px-6 py-3">
                 <h2 className="font-serif text-2xl md:text-3xl text-wedding-blue-800 font-semibold text-center">
@@ -272,12 +313,12 @@ function App() {
               <img
                 src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/carhd.png"
                 alt="Car"
-                className="w-[10rem] h-auto object-cover mx-auto mb-16"
+                className="w-[10rem] h-auto object-cover mx-auto mb-10"
               />
             </span>
           </div>
           {/* Circular Progress Countdown */}
-          <div className="flex flex-col items-center mb-12">
+          <div className="flex flex-col items-center mb-8">
             <div className="relative w-80 h-80 mb-8">
               {/* Background Circle */}
               <svg
@@ -376,12 +417,17 @@ function App() {
       </section>
 
       {/* Wedding Details */}
-      <section className="py-16 px-4 relative">
+      <section 
+        ref={venueRef}
+        className={`py-16 px-4 relative fade-in-section ${
+          isVenueVisible ? 'visible' : ''
+        }`}
+      >
         {/* Decorative Border Frame */}
         <img
           src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/border%204.png"
           alt="Decorative border"
-          className="absolute top-0 left-0 w-32 h-32 object-contain z-10"
+          className="absolute top-0 left-0 w-40 h-40 object-contain z-10"
         />
 
         <div className="absolute top-16 right-12 opacity-20">

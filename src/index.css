@@ -34,3 +34,15 @@
 .car-drag-animation {
   animation: carDrag 5s ease-in-out infinite;
 }
+
+/* Fade in animation */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 1.8s ease-out;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
