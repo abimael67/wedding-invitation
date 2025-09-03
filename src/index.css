@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Page Flip Effect */
+.page-flip-section {
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+  opacity: 0;
+  transition: transform 2.8s ease, opacity 0.8s ease;
+}
+
+.page-flip-section.visible {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+
+/* Car dragging animation */
+@keyframes carDrag {
+  0% {
+    transform: translateX(-100vw);
+  }
+  20% {
+    transform: translateX(-20%);
+  }
+  80% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+.car-drag-animation {
+  animation: carDrag 5s ease-in-out infinite;
+}

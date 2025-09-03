@@ -17,6 +17,10 @@ function App() {
     seconds: 0,
   });
 
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
+  const [hasHeroAnimated, setHasHeroAnimated] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
   const [rsvpForm, setRsvpForm] = useState({
     name: "",
     email: "",
@@ -27,7 +31,7 @@ function App() {
     message: "",
   });
 
-  const weddingDate = new Date("2025-11-02T16:00:00");
+  const weddingDate = new Date("2025-11-02T15:00:00");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -47,14 +51,75 @@ function App() {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, [hasHeroAnimated]);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imageUrls = [
+        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/5.png",
+        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/hinge.png",
+        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/6.png",
+      ];
+
+      const loadPromises = imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
+      });
+
+      try {
+        await Promise.all(loadPromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error("Error loading images:", error);
+        setImagesLoaded(true); // Continue even if some images fail
+      }
+    };
+
+    preloadImages();
   }, []);
+
+  useEffect(() => {
+    if (!imagesLoaded) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === "hero-section" && !hasHeroAnimated) {
+            if (entry.isIntersecting) {
+              setIsHeroVisible(true);
+              setHasHeroAnimated(true);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+        rootMargin: "0px 0px -200px 0px",
+      }
+    );
+
+    const heroSection = document.getElementById("hero-section");
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+
+    return () => {
+      if (heroSection) {
+        observer.unobserve(heroSection);
+      }
+    };
+  }, [hasHeroAnimated, imagesLoaded]);
 
   const addToCalendar = () => {
     const startDate = "20251102T160000Z";
-    const endDate = "20251103T020000Z";
+    const endDate = "20251102T230000Z";
     const title = "Winnifer & Abimael Wedding";
-    const details = "Join us for our special day!";
-    const location = "Wedding Venue, City";
+    const details = "Unete a nosotros en nuestro día especial!";
+    const location = "Gazebo Res. Vista Loma, Santiago";
 
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       title
@@ -72,7 +137,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-vintage-white">
+    <div className="min-h-screen bg-white relative">
       <div className="relative">
         <img
           src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/5.png"
@@ -91,32 +156,68 @@ function App() {
           </div>
         </div>
       </div>
-      <section className="bg-wedding-blue-900 text-white py-8 px-4">
+
+      <section className="bg-wedding-blue-900 text-white py-8 px-4 relative">
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-4">
             <span className="text-6xl text-wedding-blue-300">"</span>
           </div>
           <p className="text-lg md:text-xl font-light italic leading-relaxed mb-4">
-            Grábame como un sello sobre tu corazón; llévame como un sello sobre
-            tu brazo. Porque fuerte es el amor como la muerte... Ni las muchas
-            aguas pueden apagar el amor, ni los ríos pueden arrasarlo.
+            Una sola persona puede ser vencida, pero dos ya pueden defenderse; y
+            si tres unen sus fuerzas, ya no es fácil derrotarlas.
           </p>
-          <p className="text-wedding-blue-300 text-sm">Cantares 8:6-7</p>
+          <p className="text-wedding-blue-300 text-sm">Eclesiastés 4:12</p>
           <div className="mt-4">
             <span className="text-6xl text-wedding-blue-300">"</span>
           </div>
         </div>
+        {/* Hinge Images for Notebook Effect */}
+        <div className="absolute w-full z-30" style={{ bottom: "3rem" }}>
+          <img
+            src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/hinge.png"
+            alt="Notebook Hinge Left"
+            className="absolute -left-5"
+            style={{ width: "100px" }}
+          />
+          <img
+            src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/hinge.png"
+            alt="Notebook Hinge Right"
+            className="absolute right-2"
+            style={{ width: "100px" }}
+          />
+        </div>
       </section>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-b from-wedding-blue-50 to-vintage-white">
+      <section
+        id="hero-section"
+        className={`min-h-screen flex items-center justify-center px-4 bg-gradient-to-b from-wedding-blue-50 to-vintage-white relative page-flip-section ${
+          isHeroVisible ? "visible" : ""
+        }`}
+      >
         <div className="text-center max-w-lg">
           <div className="mt-8">
-            <span className="font-cursive text-6xl mt-4 -ml-8">Winnifer</span>
+            <span className="font-cursive text-6xl mt-4 -ml-24">Winnifer</span>
           </div>
+          <div className="-mt-4 -ml-16">
+            <span className="font-cursive text-2xl">&</span>
+          </div>
+          <div className="-mt-4">
+            <span className="font-cursive text-6xl mt-16 -mr-24">Abimael</span>
+          </div>
+
           <div>
-            <span className="font-cursive text-6xl mt-16 -mr-8">Abimael</span>
-            <p className="text-xl text-wedding-blue-700 mb-8">¡nos casamos!</p>
+            <p className="text-md text-wedding-blue-700  mt-4">
+              NOS COMPLACE INVITARTE A NUESTRA BODA
+            </p>
+
+            <div>
+              <img
+                src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/minirings.png"
+                alt="Wedding rings"
+                className="w-12 h-auto object-cover mx-auto"
+              />
+            </div>
 
             {/* Portrait Photo Section */}
             <div className="mb-8">
@@ -124,56 +225,149 @@ function App() {
                 <img
                   src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/6.png"
                   alt="Wedding"
-                  className="w-full h-full object-cover rounded-full"
+                  className="w-23 h-auto object-cover rounded-full"
                 />
-              </div>
-              <div className="flex justify-center mt-4 space-x-4">
-                <div className="w-3 h-3 bg-wedding-blue-300 rounded-full"></div>
-                <div className="w-3 h-3 bg-wedding-blue-400 rounded-full"></div>
-                <div className="w-3 h-3 bg-wedding-blue-300 rounded-full"></div>
               </div>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg">
-              <p className="text-wedding-blue-800 text-lg font-medium mb-2">
-                2 de Noviembre, 2025
-              </p>
-              <p className="text-wedding-blue-600">
-                Reserva la fecha para nuestro día especial
-              </p>
+              <div className="text-lg font-semibold tracking-wider text-wedding-blue-600 mb-2">
+                NOVIEMBRE
+              </div>
+              <div className="flex items-center justify-center space-x-3">
+                <span className="text-sm font-medium text-wedding-blue-500">
+                  DOM
+                </span>
+                <span className="text-2xl font-bold text-wedding-blue-400">
+                  |
+                </span>
+                <span className="text-4xl font-bold text-wedding-blue-700 bg-wedding-blue-100 px-4 py-2 rounded-lg shadow-md border-2 border-wedding-blue-300">
+                  02
+                </span>
+                <span className="text-2xl font-bold text-wedding-blue-400">
+                  |
+                </span>
+                <span className="text-sm font-medium text-wedding-blue-500">
+                  2025
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Countdown Section */}
-      <section className="py-16 px-4 bg-wedding-blue-900 text-white">
+      <section className="py-16 px-4 bg-wedding-blue-900 text-white overflow-x-hidden relative">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-serif text-3xl md:text-4xl mb-8">
-            Cuenta Regresiva
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Object.entries(timeLeft).map(([unit, value]) => (
-              <div
-                key={unit}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-4"
+          <div className="flex flex-row justify-center items-center car-drag-animation overflow-hidden">
+            <div className="mb-12">
+              {/* Minimalistic Sign */}
+              <div className="bg-vintage-cream border-2 border-wedding-blue-300 rounded-lg shadow-lg px-6 py-3">
+                <h2 className="font-serif text-2xl md:text-3xl text-wedding-blue-800 font-semibold text-center">
+                  Cuenta Regresiva
+                </h2>
+              </div>
+            </div>
+            <span>
+              <img
+                src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/carhd.png"
+                alt="Car"
+                className="w-[10rem] h-auto object-cover mx-auto mb-16"
+              />
+            </span>
+          </div>
+          {/* Circular Progress Countdown */}
+          <div className="flex flex-col items-center mb-12">
+            <div className="relative w-80 h-80 mb-8">
+              {/* Background Circle */}
+              <svg
+                className="w-full h-full transform -rotate-90"
+                viewBox="0 0 100 100"
               >
-                <div className="text-3xl md:text-4xl font-bold">{value}</div>
-                <div className="text-sm uppercase tracking-wide">
-                  {unit === "days"
-                    ? "días"
-                    : unit === "hours"
-                    ? "horas"
-                    : unit === "minutes"
-                    ? "minutos"
-                    : "segundos"}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="rgba(255,255,255,0.2)"
+                  strokeWidth="3"
+                  fill="none"
+                />
+                {/* Progress Circle */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="#ffffff"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeDasharray={`${2 * Math.PI * 45}`}
+                  strokeDashoffset={`${
+                    2 *
+                    Math.PI *
+                    45 *
+                    (1 -
+                      (() => {
+                        const weddingDate = new Date("2025-11-02T00:00:00");
+                        const yesterday = new Date();
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        yesterday.setHours(0, 0, 0, 0);
+                        const now = new Date();
+
+                        const totalTime =
+                          weddingDate.getTime() - yesterday.getTime();
+                        const elapsedTime = now.getTime() - yesterday.getTime();
+
+                        return Math.min(
+                          Math.max(elapsedTime / totalTime, 0),
+                          1
+                        );
+                      })())
+                  }`}
+                  className="transition-all duration-1000 ease-out"
+                  style={{
+                    filter: "drop-shadow(0 0 8px rgba(255,255,255,0.5))",
+                  }}
+                />
+              </svg>
+
+              {/* Center Content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold mb-2">
+                    {timeLeft.days}
+                  </div>
+                  <div className="text-lg uppercase tracking-wide mb-4">
+                    Días Restantes
+                  </div>
+                  <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div className="text-xl font-semibold">
+                        {timeLeft.hours}
+                      </div>
+                      <div className="text-xs opacity-80">Horas</div>
+                    </div>
+                    <div>
+                      <div className="text-xl font-semibold">
+                        {timeLeft.minutes}
+                      </div>
+                      <div className="text-xs opacity-80">Minutos</div>
+                    </div>
+                    <div>
+                      <div className="text-xl font-semibold">
+                        {timeLeft.seconds}
+                      </div>
+                      <div className="text-xs opacity-80">Segundos</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
+
           <button
             onClick={addToCalendar}
-            className="mt-8 bg-white text-wedding-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-vintage-cream transition-colors inline-flex items-center gap-2"
+            className="bg-white text-wedding-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-vintage-cream transition-colors inline-flex items-center gap-2"
           >
             <Calendar className="w-5 h-5" />
             Agregar al Calendario
@@ -183,10 +377,13 @@ function App() {
 
       {/* Wedding Details */}
       <section className="py-16 px-4 relative">
-        {/* Decorative floral elements */}
-        <div className="absolute top-8 left-8 opacity-20">
-          <Heart className="w-16 h-16 text-wedding-blue-300 transform rotate-12" />
-        </div>
+        {/* Decorative Border Frame */}
+        <img
+          src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/border%204.png"
+          alt="Decorative border"
+          className="absolute top-0 left-0 w-32 h-32 object-contain z-10"
+        />
+
         <div className="absolute top-16 right-12 opacity-20">
           <Heart className="w-12 h-12 text-wedding-blue-400 transform -rotate-45" />
         </div>
@@ -231,9 +428,14 @@ function App() {
                   </div>
                 </div>
               </div>
-              <button className="mt-4 text-wedding-blue-600 hover:text-wedding-blue-800 font-medium">
+              <a
+                href="https://www.google.com/maps/place/Iglesia+Adventista+Del+7mo+D%C3%ADa+Libertad/@19.4857117,-70.7224775,839m/data=!3m1!1e3!4m14!1m7!3m6!1s0x8eb1c6747ea5223d:0x70aa2edbb4262db1!2sIglesia+Adventista+Del+7mo+D%C3%ADa+Libertad!8m2!3d19.4855856!4d-70.7224636!16s%2Fg%2F1s04bxkmv!3m5!1s0x8eb1c6747ea5223d:0x70aa2edbb4262db1!8m2!3d19.4855856!4d-70.7224636!16s%2Fg%2F1s04bxkmv?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 text-wedding-blue-600 hover:text-wedding-blue-800 font-medium inline-block"
+              >
                 Ver en Mapa
-              </button>
+              </a>
             </div>
 
             {/* Reception */}
@@ -255,14 +457,19 @@ function App() {
                   <div>
                     <p>Gazebo</p>
                     <p className="text-sm text-gray-600">
-                      Av. Paseo de los Choferes, Res. Villa Loma, Santiago
+                      Av. Paseo de los Choferes, Urb. Vista Loma, Santiago
                     </p>
                   </div>
                 </div>
               </div>
-              <button className="mt-4 text-wedding-blue-600 hover:text-wedding-blue-800 font-medium">
+              <a
+                href="https://www.google.com/maps/place/Urbanizaci%C3%B3n+Vista+Loma/@19.4907108,-70.6880853,839m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8eb1c5007a8840d9:0xb8fc7c83d9036a52!8m2!3d19.4907108!4d-70.6855104!16s%2Fg%2F11vm5ny591?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 text-wedding-blue-600 hover:text-wedding-blue-800 font-medium inline-block"
+              >
                 Ver en Mapa
-              </button>
+              </a>
             </div>
           </div>
         </div>
