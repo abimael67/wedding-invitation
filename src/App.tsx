@@ -84,9 +84,9 @@ function App() {
         <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="flex items-center justify-center">
             <img
-              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/W.png"
+              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/WA.png"
               alt="W & A"
-              className="h-50 md:h-44 lg:h-60 w-auto drop-shadow-lg"
+              className="h-36 md:h-32 lg:h-45 w-auto drop-shadow-lg"
             />
           </div>
         </div>
