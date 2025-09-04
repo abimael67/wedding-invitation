@@ -63,8 +63,8 @@ export const Header = () => {
             <span className="text-6xl text-wedding-blue-300">"</span>
           </div>
           <p className="text-lg md:text-xl font-light italic leading-relaxed mb-4">
-            Una sola persona puede ser vencida, pero dos ya pueden defenderse; y
-            si tres unen sus fuerzas, ya no es fácil derrotarlas.
+            Uno solo puede ser vencido, pero dos pueden resistir. ¡La cuerda de
+            tres hilos no se rompe fácilmente!
           </p>
           <p className="text-wedding-blue-300 text-sm">Eclesiastés 4:12</p>
           <div className="mt-4">

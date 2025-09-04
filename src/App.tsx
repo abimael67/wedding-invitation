@@ -12,13 +12,13 @@ import { DressCodeAndGifts } from "./components/DressCodeAndGifts";
 import { FAQ } from "./components/FAQ";
 import { Trivia } from "./components/Trivia";
 import { Footer } from "./components/Footer";
-import Envelope from "./components/Envelope";
+//import Envelope from "./components/Envelope";
 
 function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [loadingPhrase, setLoadingPhrase] = useState("");
-  const [isEnvelopeOpened, setIsEnvelopeOpened] = useState(false);
+  // const [isEnvelopeOpened, setIsEnvelopeOpened] = useState(false);
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -136,22 +136,20 @@ function App() {
           </div>
         </div>
       )}
-      <Envelope setEnvelopeOpened={setIsEnvelopeOpened} />
-      {isEnvelopeOpened && (
-        <div className="min-h-screen bg-vintage-cream">
-          <Header />
-          <Countdown onAddToCalendar={addToCalendar} />
-          <VenueDetails />
-          <PhotoGallery />
-          <Timeline />
-          <RSVP />
-          <DressCodeAndGifts />
-          <FAQ />
-          <Trivia />
 
-          <Footer />
-        </div>
-      )}
+      <div className="min-h-screen bg-vintage-cream">
+        <Header />
+        <Countdown onAddToCalendar={addToCalendar} />
+        <VenueDetails />
+        <PhotoGallery />
+        <Timeline />
+        <RSVP />
+        <DressCodeAndGifts />
+        <FAQ />
+        <Trivia />
+
+        <Footer />
+      </div>
     </>
   );
 }

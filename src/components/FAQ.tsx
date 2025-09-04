@@ -10,13 +10,13 @@ export const FAQ = () => {
       answer: "Sí, habrá estacionamiento disponible en ambos lugares. ",
     },
     {
-      question:
-        "¿La ceremonia será en una iglesia, debo vestir de una forma determinada?",
-      answer: "Sí, la ceremonia será en una iglesia. ",
-    },
-    {
       question: "¿Se pueden traer niños?",
       answer: "No, la boda es exclusiva para adultos.",
+    },
+    {
+      question: "¿Cuántas acompañantes puedo llevar?",
+      answer:
+        "La invitación especifica la cantidad de invitados que te corresponden.",
     },
   ];
 

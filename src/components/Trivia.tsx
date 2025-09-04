@@ -10,18 +10,49 @@ export const Trivia = () => {
   const triviaQuestions = [
     {
       question: "¿Dónde se conocieron por primera vez?",
-      options: ["En la universidad", "En el trabajo", "En una fiesta", "En línea"],
+      options: [
+        "En la universidad",
+        "En el trabajo",
+        "En un campamento",
+        "En línea",
+      ],
+      correct: 2,
+    },
+    {
+      question: "¿Cuál es su comida favorita?",
+      options: ["Pizza", "Yaroa", "Tacos", "La bandera"],
       correct: 1,
     },
     {
-      question: "¿Cuál es su restaurante favorito?",
-      options: ["Italiano", "Mexicano", "Japonés", "Francés"],
+      question: "¿Cuántos años llevan juntos?",
+      options: ["2 años", "6 meses", "4 años", "1 año"],
       correct: 0,
     },
     {
-      question: "¿Cuántos años llevan juntos?",
-      options: ["2 años", "3 años", "4 años", "5 años"],
-      correct: 2,
+      question: "¿Quien dió el primer beso?",
+      options: ["Abi", "Winny", "Kiwi", "Ambos"],
+      correct: 0,
+    },
+    {
+      question: `¿Quién dijo "te amo" primero?`,
+      options: ["Abi", "Winny", "Richard", "Aún nadie lo ha dicho"],
+      correct: 1,
+    },
+    {
+      question: "¿Cuál es nuestro plan favorito?",
+      options: [
+        "Ir a un restaurante",
+        "Viajar",
+        "Ver películas",
+        "Hacer ejercicio",
+      ],
+      correct: 1,
+    },
+    {
+      question:
+        "Ambos comparten el mismo libro favorito de la biblia. ¿Cuál es?",
+      options: ["Proverbios", "Apocalipsis", "Salmos", "Filipenses"],
+      correct: 3,
     },
   ];
 
@@ -97,7 +128,8 @@ export const Trivia = () => {
                       "w-full p-3 text-left rounded-lg border transition-colors ";
                     if (showResult) {
                       if (index === triviaQuestions[currentQuestion].correct) {
-                        buttonClass += "bg-green-100 border-green-500 text-green-800";
+                        buttonClass +=
+                          "bg-green-100 border-green-500 text-green-800";
                       } else if (selectedAnswer === index.toString()) {
                         buttonClass += "bg-red-100 border-red-500 text-red-800";
                       } else {

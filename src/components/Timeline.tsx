@@ -1,17 +1,27 @@
-import { Heart } from "lucide-react";
+import {
+  Heart,
+  Church,
+  Car,
+  PartyPopperIcon,
+  Smile,
+  GlassWater,
+} from "lucide-react";
 
 export const Timeline = () => {
   const timelineEvents = [
-    { time: "3:00 PM", event: "Llegada de invitados y ubicación" },
-    { time: "4:00 PM", event: "Inicia la ceremonia de boda" },
-    { time: "4:30 PM", event: "Termina ceremonia, hora del cóctel" },
-    { time: "5:00 PM", event: "Recepción" },
-    { time: "6:00 PM", event: "Actividad 1" },
-    { time: "7:00 PM", event: "Actividad 2" },
-    { time: "8:00 PM", event: "Cena" },
-    { time: "9:00 PM", event: "Actividad 3" },
-    { time: "10:00 PM", event: "Actividad 4" },
-    { time: "11:00 PM", event: "Despedida y agradecimientos" },
+    { time: "3:00 PM", event: "Inicia la ceremonia de boda", icon: Church },
+    {
+      time: "4:00 PM",
+      event: "Fin de ceremonia. Traslado a recepción",
+      icon: Car,
+    },
+    { time: "4:30 PM", event: "Cóctel de bienvenida", icon: GlassWater },
+    { time: "5:00 PM", event: "Inicia celebración", icon: PartyPopperIcon },
+    {
+      time: "9:00 PM",
+      event: "Despedida, agradecimientos y cierre",
+      icon: Smile,
+    },
   ];
 
   return (
@@ -44,7 +54,7 @@ export const Timeline = () => {
           {timelineEvents.map((item, index) => (
             <div key={index} className="relative flex items-center mb-8">
               <div className="w-8 h-8 bg-wedding-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold z-10">
-                {index + 1}
+                {<item.icon />}
               </div>
               <div className="ml-6 bg-white rounded-lg shadow-lg p-4 flex-1">
                 <div className="font-bold text-wedding-blue-800">
