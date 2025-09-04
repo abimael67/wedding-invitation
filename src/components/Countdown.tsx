@@ -43,19 +43,17 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
     return () => clearInterval(timer);
   }, [weddingDate]);
 
-
-
   return (
-    <section 
+    <section
       ref={countdownRef}
       className={`py-16 px-4 bg-wedding-blue-900 text-white overflow-x-hidden relative fade-in-section ${
-        isCountdownVisible ? 'visible' : ''
+        isCountdownVisible ? "visible" : ""
       }`}
     >
       <img
-        src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/separator%201.png"
+        src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/header%201.svg"
         alt="Separator"
-        className="w-[20rem] h-auto object-cover mx-auto -mt-[7rem] -mb-8"
+        className="w-[24rem] h-auto object-cover mx-auto -mt-[5rem] "
       />
       <div className="max-w-4xl mx-auto text-center">
         <div className="flex flex-row justify-center items-center car-drag-animation overflow-hidden">
@@ -69,9 +67,9 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
           </div>
           <span>
             <img
-              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/carhd.png"
+              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/improved%20car.svg"
               alt="Car"
-              className="w-[10rem] h-auto object-cover mx-auto mb-10"
+              className="w-[12rem] h-auto object-cover mx-auto mb-10"
             />
           </span>
         </div>
@@ -117,10 +115,7 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
                         weddingDate.getTime() - yesterday.getTime();
                       const elapsedTime = now.getTime() - yesterday.getTime();
 
-                      return Math.min(
-                        Math.max(elapsedTime / totalTime, 0),
-                        1
-                      );
+                      return Math.min(Math.max(elapsedTime / totalTime, 0), 1);
                     })())
                 }`}
                 className="transition-all duration-1000 ease-out"
