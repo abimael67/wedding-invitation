@@ -21,7 +21,7 @@ export const FAQ = () => {
   ];
 
   return (
-    <section className="py-16 px-4 relative">
+    <section className="py-8 px-4 relative">
       {/* Decorative elements */}
       <div className="absolute top-8 right-8 opacity-10">
         <Heart className="w-16 h-16 text-wedding-blue-300 transform rotate-45" />

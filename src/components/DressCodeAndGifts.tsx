@@ -81,7 +81,8 @@ export const DressCodeAndGifts = () => {
             <div className="space-y-4 text-wedding-blue-700 text-center">
               <p className="text-sm leading-relaxed">
                 Tu presencia es el mejor regalo que podemos recibir. Si deseas
-                obsequiarnos algo, puedes donar a las siguientes cuentas:
+                obsequiarnos algo adicional, puedes donar a las siguientes
+                cuentas:
               </p>
               <div className="space-y-3">
                 <div className="bg-wedding-blue-50 rounded-lg p-3">

@@ -32,11 +32,11 @@ export const Footer = () => {
         </div>
 
         <div className="mb-8">
-          <p className="text-lg md:text-xl font-light leading-relaxed mb-4">
-            "El amor es la fuerza más humilde, pero la más poderosa de que
-            dispone el mundo."
+          <p className="text-lg md:text-xl font-light leading-relaxed mb-4 italic">
+            "Ahora permanecen la fe, la esperanza y el amor, estos tres; pero el
+            mayor de ellos es el amor."
           </p>
-          <p className="text-sm opacity-75">- Mahatma Gandhi</p>
+          <p className="text-sm opacity-75">- 1 Corintios 13:13</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-8">

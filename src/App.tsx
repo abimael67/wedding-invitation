@@ -141,13 +141,12 @@ function App() {
         <Header />
         <Countdown onAddToCalendar={addToCalendar} />
         <VenueDetails />
-        <PhotoGallery />
+        <DressCodeAndGifts />
         <Timeline />
         <RSVP />
-        <DressCodeAndGifts />
+        <PhotoGallery />
         <FAQ />
         <Trivia />
-
         <Footer />
       </div>
     </>

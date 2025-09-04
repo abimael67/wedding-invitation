@@ -62,7 +62,7 @@ export const Header = () => {
           <div className="mb-4">
             <span className="text-6xl text-wedding-blue-300">"</span>
           </div>
-          <p className="text-lg md:text-xl font-light italic leading-relaxed mb-4">
+          <p className="text-2xl md:text-2xl font-light font-handwriting leading-relaxed mb-4">
             Uno solo puede ser vencido, pero dos pueden resistir. ¡La cuerda de
             tres hilos no se rompe fácilmente!
           </p>
@@ -70,21 +70,6 @@ export const Header = () => {
           <div className="mt-4">
             <span className="text-6xl text-wedding-blue-300">"</span>
           </div>
-        </div>
-        {/* Hinge Images for Notebook Effect */}
-        <div className="absolute w-full z-30" style={{ bottom: "3rem" }}>
-          <img
-            src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/hinge.png"
-            alt="Notebook Hinge Left"
-            className="absolute -left-5"
-            style={{ width: "100px" }}
-          />
-          <img
-            src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/hinge.png"
-            alt="Notebook Hinge Right"
-            className="absolute right-2"
-            style={{ width: "100px" }}
-          />
         </div>
       </section>
 
@@ -97,13 +82,17 @@ export const Header = () => {
       >
         <div className="text-center max-w-lg">
           <div className="mt-8">
-            <span className="font-cursive text-6xl mt-4 -ml-24">Winnifer</span>
+            <span className="font-script font-semibold text-6xl mt-4 -ml-24">
+              Winnifer
+            </span>
           </div>
-          <div className="-mt-4 -ml-16">
+          <div className=" -ml-[6rem]">
             <span className="font-cursive text-2xl">&</span>
           </div>
           <div className="-mt-4">
-            <span className="font-cursive text-6xl mt-16 -mr-24">Abimael</span>
+            <span className="font-script font-semibold text-6xl mt-16 -mr-24">
+              Abimael
+            </span>
           </div>
 
           <div>
@@ -131,8 +120,8 @@ export const Header = () => {
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg">
-              <div className="text-lg font-semibold tracking-wider text-wedding-blue-600 mb-2">
-                NOVIEMBRE
+              <div className="text-3xl font-semibold font-handwriting tracking-wider text-wedding-blue-600 mb-2">
+                Noviembre
               </div>
               <div className="flex items-center justify-center space-x-3">
                 <span className="text-sm font-medium text-wedding-blue-500">
@@ -141,7 +130,7 @@ export const Header = () => {
                 <span className="text-2xl font-bold text-wedding-blue-400">
                   |
                 </span>
-                <span className="text-4xl font-bold text-wedding-blue-700 bg-wedding-blue-100 px-4 py-2 rounded-lg shadow-md border-2 border-wedding-blue-300">
+                <span className="text-4xl font-bold font-handwriting text-wedding-blue-700 bg-wedding-blue-100 px-4 py-2 rounded-lg shadow-md border-2 border-wedding-blue-300">
                   02
                 </span>
                 <span className="text-2xl font-bold text-wedding-blue-400">

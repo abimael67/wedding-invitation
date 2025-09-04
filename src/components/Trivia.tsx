@@ -67,6 +67,9 @@ export const Trivia = () => {
         setCurrentQuestion(currentQuestion + 1);
         setSelectedAnswer(null);
         setShowResult(false);
+      } else {
+        // Last question - move to final results
+        setCurrentQuestion(currentQuestion + 1);
       }
     }, 2000);
   };
@@ -78,8 +81,24 @@ export const Trivia = () => {
     setScore(0);
   };
 
+  const getTriviaMessage = (score: number) => {
+    if (score === 7) {
+      return "¡Wow! Perfecto, se nota que nos conoces bien.";
+    } else if (score >= 5 && score < 7) {
+      return "¡Buen trabajo! Casi aciertas todas.";
+    } else if (score >= 3 && score < 5) {
+      return "No está mal. Pero puedes mejorar.";
+    } else if (score === 2) {
+      return "Hmm. Supongo que nos has visto antes.";
+    } else if (score === 1) {
+      return "¿En serio?¿Una sola y la pegaste?";
+    } else {
+      return "¿Al menos sabes quienes son los que se casan?";
+    }
+  };
+
   return (
-    <section className="py-16 px-4 bg-wedding-blue-50 relative">
+    <section className="py-10 px-4 bg-wedding-blue-50 relative">
       {/* Decorative elements */}
       <div className="absolute top-8 left-8 opacity-10">
         <Heart className="w-14 h-14 text-wedding-blue-300 transform rotate-12" />
@@ -95,7 +114,7 @@ export const Trivia = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-wedding-blue-900">
-            Trivia de la Pareja
+            Trivia de los Novios
           </h2>
           <div className="flex justify-center items-center mt-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
@@ -166,7 +185,7 @@ export const Trivia = () => {
             </div>
             <Trophy className="w-16 h-16 text-wedding-blue-400 mx-auto mb-4" />
             <h3 className="text-2xl font-semibold text-wedding-blue-900 mb-4">
-              ¡Trivia Completada!
+              {getTriviaMessage(score)}
             </h3>
             <p className="text-lg text-wedding-blue-700 mb-6">
               Tu puntuación: {score} de {triviaQuestions.length}
