@@ -27,9 +27,11 @@ export const DressCodeAndGifts = () => {
                 Código de Vestimenta
               </h3>
               <div className="flex justify-center items-center mt-4">
-                <div className="w-12 h-0.5 bg-wedding-blue-300"></div>
-                <Shirt className="w-6 h-6 text-wedding-blue-400 mx-4" />
-                <div className="w-12 h-0.5 bg-wedding-blue-300"></div>
+                <img
+                  src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Couple.png"
+                  className="w-16 h-auto"
+                  alt="Wedding Couple"
+                />
               </div>
             </div>
             <div className="space-y-4 text-wedding-blue-700">
@@ -37,25 +39,17 @@ export const DressCodeAndGifts = () => {
                 <h4 className="font-semibold text-lg mb-2">Formal Elegante</h4>
                 <p className="text-sm leading-relaxed">
                   Te invitamos a vestir con elegancia para celebrar este día
-                  especial. Sugerimos colores suaves y evitar el blanco.
+                  especial.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <h5 className="font-semibold mb-2">Para Ellas:</h5>
-                  <ul className="space-y-1 text-xs">
-                    <li>• Vestido elegante</li>
-                    <li>• Colores pasteles</li>
-                    <li>• Tacones cómodos</li>
-                  </ul>
-                </div>
-                <div>
-                  <h5 className="font-semibold mb-2">Para Ellos:</h5>
-                  <ul className="space-y-1 text-xs">
-                    <li>• Traje o guayabera</li>
-                    <li>• Corbata opcional</li>
-                    <li>• Zapatos formales</li>
-                  </ul>
+              <div>
+                <h4 className="font-semibold text-lg mb-2 text-center">
+                  Evitar Colores
+                </h4>
+                <div className="flex items-center justify-center">
+                  <span className="circle bg-wedding-blue-400 w-4 h-4 rounded-full inline-block mr-2"></span>
+                  <span className="circle bg-wedding-blue-600 w-4 h-4 rounded-full inline-block mr-2"></span>
+                  <span className="circle bg-wedding-blue-900 w-4 h-4 rounded-full inline-block mr-2"></span>
                 </div>
               </div>
             </div>
@@ -87,23 +81,23 @@ export const DressCodeAndGifts = () => {
             <div className="space-y-4 text-wedding-blue-700 text-center">
               <p className="text-sm leading-relaxed">
                 Tu presencia es el mejor regalo que podemos recibir. Si deseas
-                obsequiarnos algo, hemos preparado algunas opciones:
+                obsequiarnos algo, puedes donar a las siguientes cuentas:
               </p>
               <div className="space-y-3">
                 <div className="bg-wedding-blue-50 rounded-lg p-3">
-                  <h4 className="font-semibold text-sm mb-1">
-                    Mesa de Regalos Liverpool
-                  </h4>
+                  <h4 className="font-semibold text-sm mb-1">123456678</h4>
+                  <p className="text-xs text-wedding-blue-600">Jose Martinez</p>
                   <p className="text-xs text-wedding-blue-600">
-                    Evento: [Número de evento]
+                    Banco Popular Dominicano
                   </p>
                 </div>
                 <div className="bg-wedding-blue-50 rounded-lg p-3">
-                  <h4 className="font-semibold text-sm mb-1">
-                    Aportación Monetaria
-                  </h4>
+                  <h4 className="font-semibold text-sm mb-1">232424232</h4>
                   <p className="text-xs text-wedding-blue-600">
-                    Para nuestro futuro juntos
+                    Winnifer Vargas
+                  </p>
+                  <p className="text-xs text-wedding-blue-600">
+                    Banco BHD León
                   </p>
                 </div>
               </div>

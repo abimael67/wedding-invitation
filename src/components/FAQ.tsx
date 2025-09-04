@@ -6,29 +6,17 @@ export const FAQ = () => {
 
   const faqs = [
     {
-      question: "¿Habrá transporte desde el hotel?",
-      answer:
-        "Sí, habrá transporte disponible desde los hoteles principales. Los detalles se enviarán por separado.",
+      question: "¿Habrá estacionamiento disponible?",
+      answer: "Sí, habrá estacionamiento disponible en ambos lugares. ",
     },
     {
-      question: "¿La ceremonia será al aire libre?",
-      answer:
-        "Sí, la ceremonia será en un hermoso jardín al aire libre. En caso de lluvia, tenemos un plan alternativo bajo techo.",
+      question:
+        "¿La ceremonia será en una iglesia, debo vestir de una forma determinada?",
+      answer: "Sí, la ceremonia será en una iglesia. ",
     },
     {
-      question: "¿Puedo traer niños?",
-      answer:
-        "¡Por supuesto! Los niños son bienvenidos. Habrá actividades especiales para ellos durante la recepción.",
-    },
-    {
-      question: "¿Habrá música en vivo?",
-      answer:
-        "Sí, tendremos música en vivo durante la ceremonia y DJ para la recepción con música para todos los gustos.",
-    },
-    {
-      question: "¿Qué pasa si tengo restricciones alimentarias?",
-      answer:
-        "Por favor indícanos tus restricciones en el formulario RSVP y nos aseguraremos de tener opciones adecuadas para ti.",
+      question: "¿Se pueden traer niños?",
+      answer: "No, la boda es exclusiva para adultos.",
     },
   ];
 

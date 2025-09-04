@@ -7,7 +7,6 @@ interface RSVPForm {
   phone: string;
   attending: string;
   guests: string;
-  dietary: string;
   message: string;
 }
 
@@ -18,7 +17,6 @@ export const RSVP = () => {
     phone: "",
     attending: "",
     guests: "1",
-    dietary: "",
     message: "",
   });
 
@@ -116,15 +114,7 @@ export const RSVP = () => {
             <option value="3">3 Invitados</option>
             <option value="4">4 Invitados</option>
           </select>
-          <input
-            type="text"
-            placeholder="Restricciones alimentarias o alergias"
-            value={rsvpForm.dietary}
-            onChange={(e) =>
-              setRsvpForm({ ...rsvpForm, dietary: e.target.value })
-            }
-            className="w-full p-3 border border-wedding-blue-200 rounded-lg focus:ring-2 focus:ring-wedding-blue-500 focus:border-transparent"
-          />
+
           <textarea
             placeholder="Mensaje especial para la pareja"
             value={rsvpForm.message}
