@@ -1,0 +1,32 @@
+{
+    "guests": [
+        {
+            "name": "Familia Peña López",
+            "titular": "Francis López",
+            "phone": "8291234567",
+            "maxPax": 4 ,
+            "participant": false,
+            "attending": true,
+            "pax": "4"
+        },
+        {
+            "name": "Familia Terrero Gómez",
+            "titular": "Luigi Terrero",
+            "phone": "8291234568",
+            "maxPax": 2,
+            "participant": true,
+            "attending": true,
+            "pax": "2"
+        },
+        {
+            "name": "Anderson Gómez y Andrea Peña",
+            "titular": "Anderson Gómez",
+            "phone": "8291234544",
+            "maxPax": 2,
+            "participant": true,
+            "attending": true,
+            "pax": "2"
+        }
+      
+    ]
+}

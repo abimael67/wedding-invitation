@@ -10,6 +10,11 @@ export const FAQ = () => {
       answer: "Sí, habrá estacionamiento disponible en ambos lugares. ",
     },
     {
+      question: "¿Cómo saber cuál es mi mesa?",
+      answer:
+        "En la entrada de la recepción alguien te indicará el número de tu mesa. Esta invitación también se actualizará el día de la boda y se mostrará el número de tu mesa.",
+    },
+    {
       question: "¿Se pueden traer niños?",
       answer: "No, la boda es exclusiva para adultos.",
     },
