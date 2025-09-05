@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 interface CollageProps {
@@ -8,14 +8,43 @@ interface CollageProps {
 
 export const Collage = ({ images, className = "" }: CollageProps) => {
   const [selectedImage, setSelectedImage] = useState<{ id: number; src: string } | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationOrigin, setAnimationOrigin] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
-  const openFullscreen = (image: { id: number; src: string }) => {
+  const openFullscreen = (image: { id: number; src: string }, event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setAnimationOrigin({
+      x: rect.left,
+      y: rect.top,
+      width: rect.width,
+      height: rect.height
+    });
+    setIsAnimating(true);
     setSelectedImage(image);
+    
+    // Remove animation class after animation completes
+    setTimeout(() => setIsAnimating(false), 300);
   };
 
   const closeFullscreen = () => {
     setSelectedImage(null);
   };
+
+  // Disable/enable body scroll when modal is open/closed
+  useEffect(() => {
+    if (selectedImage) {
+      // Disable scroll
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Re-enable scroll
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function to re-enable scroll when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedImage]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -57,7 +86,7 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
             <div
               key={image.id}
               className={`break-inside-avoid cursor-pointer group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] ${randomSize}`}
-              onClick={() => openFullscreen(image)}
+              onClick={(e) => openFullscreen(image, e)}
             >
               <img
                 src={image.src}
@@ -73,7 +102,9 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
       {/* Fullscreen Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          className={`fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-4 transition-opacity duration-300 ${
+            isAnimating ? 'opacity-0' : 'opacity-100'
+          }`}
           onClick={handleBackdropClick}
           onKeyDown={handleKeyDown}
           tabIndex={0}
@@ -95,7 +126,14 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
             <img
               src={selectedImage.src}
               alt={`Wedding photo ${selectedImage.id} - Fullscreen view`}
-              className="max-w-full max-h-full object-contain"
+              className={`max-w-full max-h-full object-contain transition-all duration-300 ${
+                isAnimating 
+                  ? 'transform scale-0 opacity-0'
+                  : 'transform scale-100 opacity-100'
+              }`}
+              style={isAnimating ? {
+                transformOrigin: `${animationOrigin.x + animationOrigin.width/2}px ${animationOrigin.y + animationOrigin.height/2}px`
+              } : {}}
               onClick={(e) => e.stopPropagation()}
             />
           </div>

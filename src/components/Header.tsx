@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import imagesUrl from "../data/imagesUrl.json";
 export const Header = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   const [hasHeroAnimated, setHasHeroAnimated] = useState(false);
@@ -18,7 +18,7 @@ export const Header = () => {
       },
       {
         threshold: 0.5,
-        rootMargin: "0px 0px -200px 0px",
+        rootMargin: "0px 0px 100px 0px",
       }
     );
 
@@ -48,7 +48,7 @@ export const Header = () => {
         <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="flex items-center justify-center">
             <img
-              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/WA.png"
+              src={imagesUrl.logo}
               alt="W & A"
               className="h-36 md:h-32 lg:h-45 w-auto drop-shadow-lg"
             />
@@ -76,7 +76,7 @@ export const Header = () => {
       {/* Hero Section */}
       <section
         id="hero-section"
-        className={`min-h-screen flex items-center justify-center px-4 bg-gradient-to-b from-wedding-blue-50 to-vintage-white relative page-flip-section ${
+        className={`min-h-screen flex items-center justify-center px-4 bg-gradient-to-b from-wedding-blue-50 to-vintage-white relative fade-in-section ${
           isHeroVisible ? "visible" : ""
         }`}
       >

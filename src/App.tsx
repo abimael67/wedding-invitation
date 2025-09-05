@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./index.css";
+import imagesUrl from "./data/imagesUrl.json";
 
 // Import components
 import { Header } from "./components/Header";
@@ -12,13 +13,24 @@ import { DressCodeAndGifts } from "./components/DressCodeAndGifts";
 import { FAQ } from "./components/FAQ";
 import { Trivia } from "./components/Trivia";
 import { Footer } from "./components/Footer";
-//import Envelope from "./components/Envelope";
+import { Play } from "lucide-react";
+import Envelope from "./components/Envelope";
 
 function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [loadingPhrase, setLoadingPhrase] = useState("");
-  // const [isEnvelopeOpened, setIsEnvelopeOpened] = useState(false);
+  const [audioStarted, setAudioStarted] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isEnvelopeOpened, setIsEnvelopeOpened] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const playlist = [
+    "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Rewrite-the-Stars-Piano-Instrumental.mp3",
+    "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/ony-Ann-ICARUS-feat-ARKAI-Orchestral-Version-Official.mp3",
+    "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Yiruma-River-Flows-in-You.mp3",
+  ];
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -32,11 +44,6 @@ function App() {
         "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2807.jpg",
         "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2818.jpg",
         "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2821.jpg",
-        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2849.jpg",
-        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2827.jpg",
-        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2861.jpg",
-        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3211.jpg",
-        "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3214.jpg",
       ];
 
       const loadPromises = imageUrls.map((url) => {
@@ -59,12 +66,16 @@ function App() {
             setIsExiting(true);
             setTimeout(() => {
               setImagesLoaded(true);
+              // Start audio after loading is complete
+              startBackgroundMusic();
             }, 2000);
           }, minLoadTime - loadTime);
         } else {
           setIsExiting(true);
           setTimeout(() => {
             setImagesLoaded(true);
+            // Start audio after loading is complete
+            startBackgroundMusic();
           }, 2000);
         }
         clearInterval(intervalId);
@@ -74,6 +85,8 @@ function App() {
           setIsExiting(true);
           setTimeout(() => {
             setImagesLoaded(true);
+            // Start audio after loading is complete
+            startBackgroundMusic();
           }, 2000);
         }, 2000); // Show spinner for 2 seconds even on error
       }
@@ -81,6 +94,82 @@ function App() {
 
     preloadImages();
   }, []);
+
+  const startBackgroundMusic = () => {
+    if (!audioStarted) {
+      // Start with a random song
+      const randomIndex = Math.floor(Math.random() * playlist.length);
+      setCurrentSongIndex(randomIndex);
+
+      const audio = document.getElementById(
+        "background-music"
+      ) as HTMLAudioElement;
+      if (audio) {
+        audio.src = playlist[randomIndex];
+        audio
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch((error) => {
+            console.log("Audio autoplay prevented:", error);
+            // Add click listener to start audio on first user interaction
+            const startAudioOnClick = () => {
+              audio.play().then(() => {
+                setIsPlaying(true);
+              });
+              setAudioStarted(true);
+              document.removeEventListener("click", startAudioOnClick);
+            };
+            document.addEventListener("click", startAudioOnClick);
+          });
+        setAudioStarted(true);
+      }
+    }
+  };
+
+  const playNextSong = () => {
+    const audio = document.getElementById(
+      "background-music"
+    ) as HTMLAudioElement;
+    if (audio) {
+      const nextIndex = (currentSongIndex + 1) % playlist.length;
+      setCurrentSongIndex(nextIndex);
+      audio.src = playlist[nextIndex];
+      audio.play().then(() => {
+        setIsPlaying(true);
+      });
+    }
+  };
+
+  const toggleMusic = () => {
+    const audio = document.getElementById(
+      "background-music"
+    ) as HTMLAudioElement;
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else {
+        audio.play().then(() => {
+          setIsPlaying(true);
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const audio = document.getElementById(
+      "background-music"
+    ) as HTMLAudioElement;
+    if (audio) {
+      const handleSongEnd = () => {
+        playNextSong();
+      };
+      audio.addEventListener("ended", handleSongEnd);
+      return () => audio.removeEventListener("ended", handleSongEnd);
+    }
+  }, [currentSongIndex]);
 
   const getRandomLoadingPhrases = () => {
     const loadingPhrases = [
@@ -112,6 +201,41 @@ function App() {
 
   return (
     <>
+      {/* Background Music */}
+      <audio id="background-music" preload="auto" style={{ display: "none" }} />
+
+      {/* Floating Music Control Button */}
+      {audioStarted && isEnvelopeOpened && (
+        <button
+          onClick={toggleMusic}
+          className="fixed bottom-6 right-6 w-14 h-14 bg-wedding-blue-600 hover:bg-wedding-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center justify-center group hover:scale-110 wave-button"
+          aria-label={isPlaying ? "Pause music" : "Play music"}
+        >
+          {isPlaying ? (
+            <>
+              <span></span>
+              <span></span>
+              <span></span>
+            </>
+          ) : (
+            <Play />
+          )}
+        </button>
+      )}
+
+      {/* Show Envelope after loading, before main content */}
+      {imagesLoaded && !isEnvelopeOpened && (
+        <Envelope
+          setEnvelopeOpened={() => {
+            setIsTransitioning(true);
+            setTimeout(() => {
+              setIsEnvelopeOpened(true);
+              setIsTransitioning(false);
+            }, 800);
+          }}
+        />
+      )}
+
       {/* Loading Spinner Overlay */}
       {!imagesLoaded && (
         <div
@@ -127,7 +251,7 @@ function App() {
             }`}
           >
             <img
-              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/WA.png"
+              src={imagesUrl.logo}
               alt="Loading..."
               className={`h-24 w-auto mx-auto drop-shadow-lg animate-spin transition-all duration-[2000ms] `}
             />
@@ -144,18 +268,30 @@ function App() {
         </div>
       )}
 
-      <div className="min-h-screen bg-vintage-cream">
-        <Header />
-        <Countdown onAddToCalendar={addToCalendar} />
-        <VenueDetails />
-        <DressCodeAndGifts />
-        <Timeline />
-        <PhotoGallery />
-        <RSVP />
-        <FAQ />
-        <Trivia />
-        <Footer />
-      </div>
+      {/* Transition Overlay */}
+      {isTransitioning && (
+        <div className="fixed inset-0 z-50 bg-gradient-to-br from-wedding-pink-50 via-white to-wedding-blue-50 transition-opacity duration-800"></div>
+      )}
+
+      {/* Main Wedding Invitation Content - Pre-loaded but hidden until envelope opens */}
+      {imagesLoaded && (
+        <div
+          className={`min-h-screen bg-vintage-cream ${
+            isEnvelopeOpened ? "animate-fade-in-up" : "invisible fixed -z-10"
+          }`}
+        >
+          <Header />
+          <Countdown onAddToCalendar={addToCalendar} />
+          <VenueDetails />
+          <DressCodeAndGifts />
+          <Timeline />
+          <PhotoGallery />
+          <RSVP />
+          <FAQ />
+          <Trivia />
+          <Footer />
+        </div>
+      )}
     </>
   );
 }

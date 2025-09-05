@@ -38,13 +38,29 @@
 /* Fade in animation */
 .fade-in-section {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: opacity 0.8s ease-out, transform 1.8s ease-out;
 }
 
 .fade-in-section.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Fade in up animation for envelope transition */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out;
 }
 
 .confetti-wrap {
@@ -89,4 +105,50 @@
   to {
     rotate: 1turn;
   }
+}
+
+
+.wave-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.wave-button span {
+  display: block;
+  width: 4px;
+  height: 10px;
+  background: #fff;
+  border-radius: 2px;
+  animation: wave 1s infinite ease-in-out;
+}
+
+.wave-button span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.wave-button span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.wave-button span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes wave {
+  0%, 100% { height: 10px; }
+  50% { height: 25px; }
+}
+@keyframes writing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.writing-text {
+  display: inline-block;
+  overflow: hidden;
+  height: 50px;
+  white-space: nowrap;
+  width: 0;
+  border-right: 2px solid transparent;
+  animation: writing 4s steps(30, end) forwards;
 }

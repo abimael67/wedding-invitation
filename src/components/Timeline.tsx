@@ -6,8 +6,10 @@ import {
   Smile,
   GlassWater,
 } from "lucide-react";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export const Timeline = () => {
+  const [timelineRef, isTimelineVisible] = useScrollAnimation();
   const timelineEvents = [
     { time: "3:00 PM", event: "Inicia la ceremonia de boda", icon: Church },
     {
@@ -49,10 +51,16 @@ export const Timeline = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative" ref={timelineRef as React.RefObject<HTMLDivElement>}>
           <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-wedding-blue-300"></div>
           {timelineEvents.map((item, index) => (
-            <div key={index} className="relative flex items-center mb-8">
+            <div 
+              key={index} 
+              className={`relative flex items-center mb-8 fade-in-section ${
+                isTimelineVisible ? 'visible' : ''
+              }`}
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
               <div className="w-8 h-8 bg-wedding-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold z-10">
                 {<item.icon />}
               </div>
