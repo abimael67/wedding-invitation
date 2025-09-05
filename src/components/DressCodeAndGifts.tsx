@@ -2,7 +2,7 @@ import { Heart, Shirt, Gift } from "lucide-react";
 
 export const DressCodeAndGifts = () => {
   return (
-    <section className="py-16 px-4 bg-vintage-cream relative">
+    <section className="py-4 px-4 bg-vintage-cream relative">
       {/* Decorative elements */}
       <div className="absolute top-8 left-8 opacity-10">
         <Heart className="w-14 h-14 text-wedding-blue-300 transform rotate-12" />

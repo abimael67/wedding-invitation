@@ -150,8 +150,8 @@ function App() {
         <VenueDetails />
         <DressCodeAndGifts />
         <Timeline />
-        <RSVP />
         <PhotoGallery />
+        <RSVP />
         <FAQ />
         <Trivia />
         <Footer />

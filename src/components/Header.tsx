@@ -80,26 +80,30 @@ export const Header = () => {
           isHeroVisible ? "visible" : ""
         }`}
       >
+        <img
+          src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/leaves_bg.png"
+          alt="Wedding"
+          className="absolute top-0 left-0 w-full h-[50%] object-cover z-[-1] opacity-40"
+        />
+
         <div className="text-center max-w-lg">
           <div className="mt-8">
-            <span className="font-script font-semibold text-6xl mt-4 -ml-24">
+            <span className="font-script text-wedding-blue-700 text-6xl mt-4 -ml-24">
               Winnifer
             </span>
           </div>
           <div className=" -ml-[6rem]">
-            <span className="font-cursive text-2xl">&</span>
+            <span className="font-cursive text-wedding-blue-700 text-2xl">
+              &
+            </span>
           </div>
           <div className="-mt-4">
-            <span className="font-script font-semibold text-6xl mt-16 -mr-24">
+            <span className="font-script text-wedding-blue-700 text-6xl mt-16 -mr-24">
               Abimael
             </span>
           </div>
 
           <div>
-            <p className="text-md text-wedding-blue-700  mt-4">
-              NOS COMPLACE INVITARTE A NUESTRA BODA
-            </p>
-
             <div>
               <img
                 src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/minirings.png"
@@ -107,42 +111,60 @@ export const Header = () => {
                 className="w-12 h-auto object-cover mx-auto"
               />
             </div>
+            <p className="text-sm font-roboto text-wedding-blue-700  mt-4">
+              NOS COMPLACE INVITARTE A NUESTRA BODA
+            </p>
 
             {/* Portrait Photo Section */}
-            <div className="mb-8">
-              <div className="relative mx-auto w-70 h-70 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+
+            <div className="mb-8 h-[450px] flex items-center justify-center">
+              <div className="w-[300px] h-50 md:w-60 md:h-60 absolute overflow-hidden border-8 border-white shadow-2xl rotate-[350deg]">
+                <img
+                  src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2827.jpg"
+                  alt="Wedding"
+                  className=" h-[350px] "
+                />
+                <div className="h-[40px] w-full bg-white absolute bottom-0"></div>
+              </div>
+              <div className="w-[300px] h-50 md:w-60 md:h-60 absolute ml-8 mt-14 overflow-hidden border-8 border-white shadow-2xl rotate-[10deg]">
                 <img
                   src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3214.jpg"
                   alt="Wedding"
-                  className="w-23 h-auto object-cover rounded-full"
+                  className=" h-[350px] "
                 />
+                <div className="h-[40px] w-full bg-white absolute bottom-0"></div>
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+            <div className="mb-8">
               <div className="text-3xl font-semibold font-handwriting tracking-wider text-wedding-blue-600 mb-2">
                 Noviembre
               </div>
               <div className="flex items-center justify-center space-x-3">
-                <span className="text-sm font-medium text-wedding-blue-500">
+                <span className="text-lg font-medium text-wedding-blue-500">
                   DOM
                 </span>
                 <span className="text-2xl font-bold text-wedding-blue-400">
                   |
                 </span>
-                <span className="text-4xl font-bold font-handwriting text-wedding-blue-700 bg-wedding-blue-100 px-4 py-2 rounded-lg shadow-md border-2 border-wedding-blue-300">
+                <span className="text-4xl font-bold font-handwriting text-wedding-blue-700 px-4 py-2 ">
                   02
                 </span>
                 <span className="text-2xl font-bold text-wedding-blue-400">
                   |
                 </span>
-                <span className="text-sm font-medium text-wedding-blue-500">
+                <span className="text-lg text-bold text-wedding-blue-500">
                   2025
                 </span>
               </div>
             </div>
           </div>
         </div>
+        <img
+          src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/leaves_bg.png"
+          alt="Wedding"
+          className="absolute bottom-0 right-0 w-full h-[50%] transform rotate-180 object-cover z-[-1] opacity-40"
+        />
       </section>
     </div>
   );
