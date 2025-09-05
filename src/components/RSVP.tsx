@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import data from "../data/guests.json";
-import Confetti from "../Utils/Confetti";
+import Confetti from "../Shared/Confetti";
 interface RSVPForm {
   name: string;
   phone: string;
