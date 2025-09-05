@@ -39,7 +39,7 @@ export const Header = () => {
       {/* Portrait Section */}
       <div className="relative">
         <img
-          src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/5.png"
+          src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3253.jpg"
           alt="Wedding"
           id="portrait"
           className="w-full h-full object-cover"
@@ -112,7 +112,7 @@ export const Header = () => {
             <div className="mb-8">
               <div className="relative mx-auto w-70 h-70 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl">
                 <img
-                  src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/6.png"
+                  src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3214.jpg"
                   alt="Wedding"
                   className="w-23 h-auto object-cover rounded-full"
                 />
