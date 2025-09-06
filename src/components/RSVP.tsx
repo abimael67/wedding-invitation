@@ -33,18 +33,18 @@ export const RSVP = () => {
         pax: String(currentGuest.pax || 1),
         message: currentGuest.message || "",
       });
+      setResponseSent(true);
     }
-    if (rsvpForm.attending === "yes") {
-      setShowConfetti(true);
-      const timer = setTimeout(() => {
-        setShowConfetti(false);
-      }, 10000); // 10 seconds
+  }, [currentGuest]);
 
-      return () => clearTimeout(timer);
-    } else {
-      setShowConfetti(false);
+  useEffect(() => {
+    if (responseSent) {
+      setShowConfetti(true);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 5000);
     }
-  }, [rsvpForm.attending, responseSent, currentGuest]);
+  }, [responseSent]);
 
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +107,7 @@ export const RSVP = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
         </div>
-        {(responseSent || currentGuest.attending !== null) && (
+        {responseSent && (
           <div className="bg-white rounded-lg shadow-lg p-6 space-y-4 border-t-4 border-wedding-blue-400 relative overflow-hidden">
             {rsvpForm.attending === "no" && (
               <>
@@ -119,7 +119,7 @@ export const RSVP = () => {
                 </p>
               </>
             )}
-            {rsvpForm.attending === "yes" && (
+            {responseSent && rsvpForm.attending === "yes" && (
               <>
                 {showConfetti && <Confetti />}
 
@@ -155,11 +155,7 @@ export const RSVP = () => {
             <div className="text-center">
               <button
                 onClick={() => {
-                  submitRSVP({
-                    attending: null,
-                  }).then(() => {
-                    setResponseSent(false);
-                  });
+                  setResponseSent(false);
                 }}
                 className="bg-wedding-blue-500 hover:bg-wedding-blue-600 text-white py-2 px-4 rounded mt-4"
               >
@@ -168,7 +164,7 @@ export const RSVP = () => {
             </div>
           </div>
         )}
-        {!responseSent && currentGuest.attending === null && (
+        {!responseSent && (
           <form
             onSubmit={handleRsvpSubmit}
             className="bg-vintage-white rounded-lg shadow-lg p-6 space-y-4 border-t-4 border-wedding-blue-400 relative overflow-hidden"

@@ -8,12 +8,16 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-wedding-blue-50 via-vintage-white to-wedding-blue-100 flex items-center justify-center p-4 relative overflow-hidden">
       <div className="text-center max-w-md mx-auto">
-        <h1 className="text-4xl font-bold font-handwriting text-wedding-blue-800 mb-8 writing-text">
-          {currentGuest?.name}
-        </h1>
-        <h3 className="text-lg font-serif text-wedding-blue-800 mb-4">
-          Sus manos
-        </h3>
+        {currentGuest && (
+          <div>
+            <h1 className="text-4xl font-bold font-handwriting text-wedding-blue-800 mb-8 writing-text">
+              {currentGuest?.name}
+            </h1>
+            <h3 className="text-lg font-serif text-wedding-blue-800 mb-4">
+              Sus manos
+            </h3>
+          </div>
+        )}
         {/* Envelope illustration */}
         <div className="relative mb-8">
           <div className="w-80 h-56 mx-auto relative">
@@ -72,10 +76,12 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
 
           <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-wedding-blue-300"></div>
         </div>
-        <p className="text-sm text-gray-600 mt-8 italic">
-          Invitación válida para {currentGuest?.maxPax}{" "}
-          {currentGuest?.maxPax === 1 ? "persona" : "personas"}
-        </p>
+        {currentGuest && (
+          <p className="text-sm text-gray-600 mt-8 italic">
+            Invitación valida para {currentGuest?.pax}{" "}
+            {currentGuest?.pax === 1 ? "persona" : "personas"}
+          </p>
+        )}
       </div>
     </div>
   );
