@@ -195,27 +195,29 @@ export const RSVP = () => {
               <option value="yes">¡Sí, estaré ahí!</option>
               <option value="no">Lo siento, no podré asistir</option>
             </select>
-            {rsvpForm.attending === "yes" && (
-              <select
-                value={rsvpForm.pax}
-                onChange={(e) =>
-                  setRsvpForm({ ...rsvpForm, pax: e.target.value })
-                }
-                className="w-full p-3 border border-wedding-blue-200 rounded-lg focus:ring-2 focus:ring-wedding-blue-500 focus:border-transparent"
-              >
-                <option value="">¿Cuantos acompañantes llevarás?</option>
-                <option value="1">Iré yo solo/a</option>
-                {currentGuest.maxPax > 1 &&
-                  Array.from({ length: currentGuest.maxPax - 1 }).map(
-                    (_, index) => (
-                      <option key={index} value={index + 2}>
-                        Llevaré {index + 1} acompañante
-                        {index + 1 > 1 ? "s" : ""}
-                      </option>
-                    )
-                  )}
-              </select>
-            )}
+            {rsvpForm.attending &&
+              currentGuest.maxPax > 1 &&
+              rsvpForm.attending === "yes" && (
+                <select
+                  value={rsvpForm.pax}
+                  onChange={(e) =>
+                    setRsvpForm({ ...rsvpForm, pax: e.target.value })
+                  }
+                  className="w-full p-3 border border-wedding-blue-200 rounded-lg focus:ring-2 focus:ring-wedding-blue-500 focus:border-transparent"
+                >
+                  <option value="">¿Cuantos acompañantes llevarás?</option>
+                  <option value="1">Iré yo solo/a</option>
+                  {currentGuest.maxPax > 1 &&
+                    Array.from({ length: currentGuest.maxPax - 1 }).map(
+                      (_, index) => (
+                        <option key={index} value={index + 2}>
+                          Llevaré {index + 1} acompañante
+                          {index + 1 > 1 ? "s" : ""}
+                        </option>
+                      )
+                    )}
+                </select>
+              )}
 
             <textarea
               placeholder="Mensaje especial para la pareja"

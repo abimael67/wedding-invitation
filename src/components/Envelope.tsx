@@ -78,8 +78,8 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
         </div>
         {currentGuest && (
           <p className="text-sm text-gray-600 mt-8 italic">
-            Invitación valida para {currentGuest?.pax}{" "}
-            {currentGuest?.pax === 1 ? "persona" : "personas"}
+            Invitación válida para {currentGuest?.maxPax}{" "}
+            {currentGuest?.maxPax === 1 ? "persona" : "personas"}
           </p>
         )}
         {!currentGuest && (
