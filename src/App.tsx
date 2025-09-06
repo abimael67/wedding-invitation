@@ -15,6 +15,7 @@ import { Trivia } from "./components/Trivia";
 import { Footer } from "./components/Footer";
 import { Play } from "lucide-react";
 import Envelope from "./components/Envelope";
+import { GuestProvider } from "./contexts/GuestContext";
 
 function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -200,7 +201,7 @@ function App() {
   };
 
   return (
-    <>
+    <GuestProvider>
       {/* Background Music */}
       <audio id="background-music" preload="auto" style={{ display: "none" }} />
 
@@ -292,7 +293,7 @@ function App() {
           <Footer />
         </div>
       )}
-    </>
+    </GuestProvider>
   );
 }
 

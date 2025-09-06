@@ -83,7 +83,7 @@ export const Header = () => {
         <img
           src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/leaves_bg.png"
           alt="Wedding"
-          className="absolute top-0 left-0 w-full h-[50%] object-cover z-[-1] opacity-40"
+          className="absolute top-0 left-0 w-full h-[500px] object-cover z-[-1] opacity-40"
         />
 
         <div className="text-center max-w-lg">
@@ -118,7 +118,7 @@ export const Header = () => {
             {/* Portrait Photo Section */}
 
             <div className="mb-8 h-[450px] flex items-center justify-center">
-              <div className="w-[300px] h-50 md:w-60 md:h-60 absolute overflow-hidden border-8 border-white shadow-2xl rotate-[350deg]">
+              <div className=" h-50  absolute overflow-hidden border-8 border-white shadow-2xl rotate-[350deg]">
                 <img
                   src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2827.jpg"
                   alt="Wedding"
@@ -126,7 +126,7 @@ export const Header = () => {
                 />
                 <div className="h-[40px] w-full bg-white absolute bottom-0"></div>
               </div>
-              <div className="w-[300px] h-50 md:w-60 md:h-60 absolute ml-8 mt-14 overflow-hidden border-8 border-white shadow-2xl rotate-[10deg]">
+              <div className="w-[300px] h-50 absolute ml-8 mt-14 overflow-hidden border-8 border-white shadow-2xl rotate-[10deg]">
                 <img
                   src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3214.jpg"
                   alt="Wedding"

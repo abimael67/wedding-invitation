@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
-import data from "../data/guests.json";
 import Confetti from "../Shared/Confetti";
+import { useGuestContext, useGuestRSVP } from "../hooks/useGuestContext";
 interface RSVPForm {
   name: string;
   phone: string;
@@ -9,8 +9,8 @@ interface RSVPForm {
   pax: string;
   message: string;
 }
-const googleSheetWebAppUrl =
-  "https://script.google.com/macros/s/AKfycbyM7ddg9rpR2UvsydGrdYGTNpj1RaygAxHVPJYpo6vihFnvhpI-8OtbNiHlkGqsO_iH/exec";
+// const googleSheetWebAppUrl =
+//   "https://script.google.com/macros/s/AKfycbyM7ddg9rpR2UvsydGrdYGTNpj1RaygAxHVPJYpo6vihFnvhpI-8OtbNiHlkGqsO_iH/exec";
 
 export const RSVP = () => {
   const [rsvpForm, setRsvpForm] = useState<RSVPForm>({
@@ -21,11 +21,19 @@ export const RSVP = () => {
     message: "",
   });
   const [responseSent, setResponseSent] = useState(false);
-  const [sendingResponse, setSendingResponse] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-
+  const { currentGuest } = useGuestContext();
+  const { submitRSVP, submitting } = useGuestRSVP();
   // Show confetti for 5 seconds when user confirms attendance
   useEffect(() => {
+    if (currentGuest && currentGuest.attending !== null) {
+      setRsvpForm({
+        ...rsvpForm,
+        attending: currentGuest.attending ? "yes" : "no",
+        pax: String(currentGuest.pax || 1),
+        message: currentGuest.message || "",
+      });
+    }
     if (rsvpForm.attending === "yes") {
       setShowConfetti(true);
       const timer = setTimeout(() => {
@@ -36,70 +44,32 @@ export const RSVP = () => {
     } else {
       setShowConfetti(false);
     }
-  }, [rsvpForm.attending, responseSent]);
-
-  const [guest, setGuest] = useState<{
-    name: string;
-    phone: string;
-    participant: boolean;
-    maxPax: number;
-    titular: string;
-  } | null>(null);
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const obj: { [key: string]: string } = {};
-    searchParams.forEach((value, key) => {
-      obj[key] = value;
-    });
-
-    const guest = getGuestByPhone(obj.code) || null;
-    setGuest(guest);
-  }, []);
-
-  const getGuestByPhone = (phone: string) => {
-    const guest = data.guests.find((g) => g.phone === phone);
-    return guest;
-  };
+  }, [rsvpForm.attending, responseSent, currentGuest]);
 
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (sendingResponse) {
+    if (submitting) {
       return;
     }
-    if (!guest) {
+    if (!currentGuest) {
       alert(
         "No se pudo encontrar el invitado. Por favor contacta a los organizadores."
       );
       return;
     }
 
-    setSendingResponse(true);
-
-    const data = {
-      name: guest.name,
-      phone: guest.phone,
-      attending: rsvpForm.attending,
-      pax: rsvpForm.pax,
-      message: rsvpForm.message,
-    };
-
     try {
-      setSendingResponse(true);
-      await fetch(googleSheetWebAppUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(data),
+      submitRSVP({
+        attending: rsvpForm.attending === "yes",
+        pax: Number(rsvpForm.pax),
+        message: rsvpForm.message,
       });
     } catch (error) {
       console.error("Error submitting RSVP:", error);
     }
     setResponseSent(true);
-    setSendingResponse(false);
   };
-  if (!guest) {
+  if (!currentGuest) {
     return null;
   }
   return (
@@ -129,7 +99,7 @@ export const RSVP = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-wedding-blue-900">
-            RSVP
+            CONFIRMACIÓN
           </h2>
           <div className="flex justify-center items-center mt-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
@@ -137,15 +107,17 @@ export const RSVP = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
         </div>
-        {responseSent && (
+        {(responseSent || currentGuest.attending !== null) && (
           <div className="bg-white rounded-lg shadow-lg p-6 space-y-4 border-t-4 border-wedding-blue-400 relative overflow-hidden">
-            <p className="text-center text-wedding-blue-900">
-              Gracias por informarnos.
-            </p>
             {rsvpForm.attending === "no" && (
-              <p className="text-center text-wedding-blue-900">
-                Te echaremos en falta.
-              </p>
+              <>
+                <p className="text-center text-wedding-blue-900">
+                  Gracias por informarnos.
+                </p>
+                <p className="text-center text-wedding-blue-900">
+                  Te echaremos en falta.
+                </p>
+              </>
             )}
             {rsvpForm.attending === "yes" && (
               <>
@@ -158,7 +130,7 @@ export const RSVP = () => {
                     <Heart className="w-6 h-6 text-pink-500 mx-1 animate-pulse" />
                   </div>
                   <h3 className="text-2xl font-bold text-wedding-blue-900 mb-2">
-                    ¡Felicidades! 🎉
+                    ¡Gracias!
                   </h3>
                   <p className="text-lg text-wedding-blue-800 mb-2">
                     ¡Qué emoción saber que estarás con nosotros en este día tan
@@ -170,7 +142,11 @@ export const RSVP = () => {
                   </p>
                   <div className="flex justify-center items-center mt-3">
                     <span className="mx-2 text-wedding-blue-600 font-medium">
-                      Te esperamos con muchísima alegría
+                      {`${
+                        currentGuest.pax === 1
+                          ? "Te esperamos con muchísima alegría"
+                          : `Los esperamos a los ${currentGuest.pax} con mucha alegría`
+                      }`}
                     </span>
                   </div>
                 </div>
@@ -178,7 +154,13 @@ export const RSVP = () => {
             )}
             <div className="text-center">
               <button
-                onClick={() => setResponseSent(false)}
+                onClick={() => {
+                  submitRSVP({
+                    attending: null,
+                  }).then(() => {
+                    setResponseSent(false);
+                  });
+                }}
                 className="bg-wedding-blue-500 hover:bg-wedding-blue-600 text-white py-2 px-4 rounded mt-4"
               >
                 Cambiar respuesta
@@ -186,7 +168,7 @@ export const RSVP = () => {
             </div>
           </div>
         )}
-        {!responseSent && (
+        {!responseSent && currentGuest.attending === null && (
           <form
             onSubmit={handleRsvpSubmit}
             className="bg-vintage-white rounded-lg shadow-lg p-6 space-y-4 border-t-4 border-wedding-blue-400 relative overflow-hidden"
@@ -196,7 +178,7 @@ export const RSVP = () => {
             </div>
             <div>
               <h3 className="font-handwriting text-5xl text-wedding-blue-900 mb-4">
-                {guest.name}
+                {currentGuest.name}
               </h3>
               <h4 className="font-serif text-lg text-wedding-blue-900">
                 Para nosotros es un honor poder contar con tu presencia en este
@@ -227,12 +209,15 @@ export const RSVP = () => {
               >
                 <option value="">¿Cuantos acompañantes llevarás?</option>
                 <option value="1">Iré yo solo/a</option>
-                {guest.maxPax > 1 &&
-                  Array.from({ length: guest.maxPax - 1 }).map((_, index) => (
-                    <option key={index} value={index + 2}>
-                      Llevaré {index + 1} acompañante{index + 1 > 1 ? "s" : ""}
-                    </option>
-                  ))}
+                {currentGuest.maxPax > 1 &&
+                  Array.from({ length: currentGuest.maxPax - 1 }).map(
+                    (_, index) => (
+                      <option key={index} value={index + 2}>
+                        Llevaré {index + 1} acompañante
+                        {index + 1 > 1 ? "s" : ""}
+                      </option>
+                    )
+                  )}
               </select>
             )}
 
@@ -250,7 +235,7 @@ export const RSVP = () => {
               type="submit"
               className="w-full bg-wedding-blue-600 text-white py-3 rounded-lg font-medium hover:bg-wedding-blue-700 transition-colors disabled:bg-wedding-blue-300 disabled:cursor-not-allowed"
             >
-              {sendingResponse ? "Enviando..." : "Enviar RSVP"}
+              {submitting ? "Enviando..." : "Enviar RSVP"}
             </button>
           </form>
         )}
