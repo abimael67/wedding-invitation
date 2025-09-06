@@ -82,6 +82,11 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
             {currentGuest?.pax === 1 ? "persona" : "personas"}
           </p>
         )}
+        {!currentGuest && (
+          <p className="text-sm text-gray-600 mt-8 italic">
+            Invitado no encontrado
+          </p>
+        )}
       </div>
     </div>
   );
