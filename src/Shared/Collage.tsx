@@ -122,11 +122,11 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
           </button>
 
           {/* Fullscreen Image */}
-          <div className="max-w-full max-h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center">
             <img
               src={selectedImage.src}
               alt={`Wedding photo ${selectedImage.id} - Fullscreen view`}
-              className={`max-w-full max-h-full object-contain transition-all duration-300 ${
+              className={`w-auto h-auto max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)] object-contain transition-all duration-300 ${
                 isAnimating 
                   ? 'transform scale-0 opacity-0'
                   : 'transform scale-100 opacity-100'

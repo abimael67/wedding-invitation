@@ -6,7 +6,7 @@ interface RSVPForm {
   name: string;
   phone: string;
   attending: string;
-  pax: string;
+  pax: number;
   message: string;
 }
 // const googleSheetWebAppUrl =
@@ -17,7 +17,7 @@ export const RSVP = () => {
     name: "",
     phone: "",
     attending: "",
-    pax: "1",
+    pax: 1,
     message: "",
   });
   const [responseSent, setResponseSent] = useState(false);
@@ -30,7 +30,7 @@ export const RSVP = () => {
       setRsvpForm({
         ...rsvpForm,
         attending: currentGuest.attending ? "yes" : "no",
-        pax: String(currentGuest.pax || 1),
+        pax: currentGuest.pax || 1,
         message: currentGuest.message || "",
       });
       setResponseSent(true);
@@ -143,9 +143,9 @@ export const RSVP = () => {
                   <div className="flex justify-center items-center mt-3">
                     <span className="mx-2 text-wedding-blue-600 font-medium">
                       {`${
-                        currentGuest.pax === 1
+                        rsvpForm.pax === 1
                           ? "Te esperamos con muchísima alegría"
-                          : `Los esperamos a los ${currentGuest.pax} con mucha alegría`
+                          : `Los esperamos a los ${rsvpForm.pax} con mucha alegría`
                       }`}
                     </span>
                   </div>
@@ -201,7 +201,7 @@ export const RSVP = () => {
                 <select
                   value={rsvpForm.pax}
                   onChange={(e) =>
-                    setRsvpForm({ ...rsvpForm, pax: e.target.value })
+                    setRsvpForm({ ...rsvpForm, pax: Number(e.target.value) })
                   }
                   className="w-full p-3 border border-wedding-blue-200 rounded-lg focus:ring-2 focus:ring-wedding-blue-500 focus:border-transparent"
                 >
