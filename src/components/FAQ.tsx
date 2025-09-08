@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Heart, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Heart,
+  ChevronDown,
+  ChevronUp,
+  CircleQuestionMark,
+} from "lucide-react";
 
 export const FAQ = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -38,7 +43,7 @@ export const FAQ = () => {
         <div className="text-center mb-12">
           <div className="flex justify-center items-center mb-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
-            <Heart className="w-6 h-6 text-wedding-blue-400 mx-4" />
+            <CircleQuestionMark className="w-6 h-6 text-wedding-blue-400 mx-4" />
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-wedding-blue-900">
@@ -46,7 +51,7 @@ export const FAQ = () => {
           </h2>
           <div className="flex justify-center items-center mt-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
-            <Heart className="w-6 h-6 text-wedding-blue-400 mx-4" />
+            <CircleQuestionMark className="w-6 h-6 text-wedding-blue-400 mx-4" />
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
         </div>

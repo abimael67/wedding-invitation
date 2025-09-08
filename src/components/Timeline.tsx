@@ -5,6 +5,7 @@ import {
   PartyPopperIcon,
   Smile,
   GlassWater,
+  Clock,
 } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
@@ -39,7 +40,7 @@ export const Timeline = () => {
         <div className="text-center mb-12">
           <div className="flex justify-center items-center mb-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
-            <Heart className="w-6 h-6 text-wedding-blue-400 mx-4" />
+            <Clock className="w-6 h-6 text-wedding-blue-400 mx-4" />
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-wedding-blue-900">
@@ -47,7 +48,7 @@ export const Timeline = () => {
           </h2>
           <div className="flex justify-center items-center mt-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
-            <Heart className="w-6 h-6 text-wedding-blue-400 mx-4" />
+            <Clock className="w-6 h-6 text-wedding-blue-400 mx-4" />
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
         </div>

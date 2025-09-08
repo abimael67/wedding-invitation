@@ -114,7 +114,7 @@ export const Trivia = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-wedding-blue-900">
-            Trivia de los Novios
+            Trivia de la Pareja
           </h2>
           <div className="flex justify-center items-center mt-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
