@@ -73,16 +73,7 @@ export const RSVP = () => {
     return null;
   }
   return (
-    <section
-      className="py-8 px-4 bg-vintage-white relative"
-      style={{
-        backgroundImage: `url('https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/flowers%20bg.png')`,
-        backgroundRepeat: "repeat",
-        backgroundSize: "150px 200px",
-        backgroundPosition: "center",
-        opacity: 0.95,
-      }}
-    >
+    <section className="py-8 px-4 bg-vintage-white relative">
       <div className="absolute inset-0 bg-vintage-cream/80 pointer-events-none"></div>
       {/* Decorative elements */}
       <div className="absolute top-8 left-8 opacity-10 z-10">
@@ -177,9 +168,9 @@ export const RSVP = () => {
                 {currentGuest.name}
               </h3>
               <h4 className="font-serif text-lg text-wedding-blue-900">
-                Para nosotros es un honor poder contar con tu presencia en este
+                Para nosotros es un honor poder contar con su presencia en este
                 evento que marcará el inicio de una nueva etapa en nuestras
-                vidas. Por favor, confirma tu asistencia para prepararte un
+                vidas. Por favor, confirme su asistencia para prepararle un
                 lugar especial.
               </h4>
             </div>

@@ -98,7 +98,7 @@ export const Trivia = () => {
   };
 
   return (
-    <section className="py-10 px-4 bg-wedding-blue-50 relative">
+    <section className="py-10 px-4 relative">
       {/* Decorative elements */}
       <div className="absolute top-8 left-8 opacity-10">
         <Heart className="w-14 h-14 text-wedding-blue-300 transform rotate-12" />
@@ -157,7 +157,7 @@ export const Trivia = () => {
                       }
                     } else {
                       buttonClass +=
-                        "bg-wedding-blue-50 border-wedding-blue-200 text-wedding-blue-800 hover:bg-wedding-blue-100";
+                        "bg-wedding-blue-50 border-wedding-blue-200 text-wedding-blue-800";
                     }
 
                     return (

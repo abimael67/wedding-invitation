@@ -147,7 +147,7 @@ export const Header = () => {
                 <span className="text-2xl font-bold text-wedding-blue-400">
                   |
                 </span>
-                <span className="text-4xl font-bold font-handwriting text-wedding-blue-700 px-4 py-2 ">
+                <span className="text-4xl font-bold font-handwriting text-red-600 px-4 py-2 ">
                   02
                 </span>
                 <span className="text-2xl font-bold text-wedding-blue-400">

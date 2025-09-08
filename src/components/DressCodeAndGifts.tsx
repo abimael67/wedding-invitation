@@ -2,7 +2,7 @@ import { Heart, Shirt, Gift } from "lucide-react";
 
 export const DressCodeAndGifts = () => {
   return (
-    <section className="py-4 px-4 bg-vintage-cream relative">
+    <section className="py-4 px-4 relative">
       {/* Decorative elements */}
       <div className="absolute top-8 left-8 opacity-10">
         <Heart className="w-14 h-14 text-wedding-blue-300 transform rotate-12" />
@@ -81,24 +81,24 @@ export const DressCodeAndGifts = () => {
             <div className="space-y-4 text-wedding-blue-700 text-center">
               <p className="text-sm leading-relaxed">
                 Tu presencia es el mejor regalo que podemos recibir. Si deseas
-                obsequiarnos algo adicional, puedes donar a las siguientes
+                obsequiarnos algo adicional, puedes hacerlo a las siguientes
                 cuentas:
               </p>
               <div className="space-y-3">
                 <div className="bg-wedding-blue-50 rounded-lg p-3">
-                  <h4 className="font-semibold text-sm mb-1">123456678</h4>
-                  <p className="text-xs text-wedding-blue-600">Jose Martinez</p>
-                  <p className="text-xs text-wedding-blue-600">
-                    Banco Popular Dominicano
-                  </p>
-                </div>
-                <div className="bg-wedding-blue-50 rounded-lg p-3">
-                  <h4 className="font-semibold text-sm mb-1">232424232</h4>
+                  <h4 className="font-semibold text-sm mb-1">29727570010</h4>
                   <p className="text-xs text-wedding-blue-600">
                     Winnifer Vargas
                   </p>
                   <p className="text-xs text-wedding-blue-600">
                     Banco BHD León
+                  </p>
+                </div>
+                <div className="bg-wedding-blue-50 rounded-lg p-3">
+                  <h4 className="font-semibold text-sm mb-1">810962571</h4>
+                  <p className="text-xs text-wedding-blue-600">Jose Martinez</p>
+                  <p className="text-xs text-wedding-blue-600">
+                    Banco Popular Dominicano
                   </p>
                 </div>
               </div>

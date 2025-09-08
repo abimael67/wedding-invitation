@@ -12,7 +12,6 @@ export const PhotoGallery = () => {
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2827.jpg",
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2861.jpg",
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3211.jpg",
-    "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3214.jpg",
   ];
 
   const photos = imageUrls.map((url, index) => ({
@@ -21,18 +20,7 @@ export const PhotoGallery = () => {
   }));
 
   return (
-    <section
-      className="py-16 px-4 bg-vintage-cream relative"
-      style={{
-        backgroundImage: `url('https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/flowers%20bg.png')`,
-        backgroundRepeat: "repeat",
-        backgroundSize: "150px 200px",
-        backgroundPosition: "center",
-        opacity: 0.95,
-      }}
-    >
-      <div className="absolute z-0 inset-0 bg-vintage-cream/80 pointer-events-none"></div>
-
+    <section className="py-8 px-4 relative">
       <div className="max-w-4xl mx-auto text-center z-10">
         {/* Header */}
         <div className="mb-12 relative z-10">

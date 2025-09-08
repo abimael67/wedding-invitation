@@ -27,9 +27,10 @@ function App() {
   const [isEnvelopeOpened, setIsEnvelopeOpened] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+
+
   const playlist = [
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Rewrite-the-Stars-Piano-Instrumental.mp3",
-    "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/ony-Ann-ICARUS-feat-ARKAI-Orchestral-Version-Official.mp3",
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Yiruma-River-Flows-in-You.mp3",
   ];
 
@@ -274,11 +275,35 @@ function App() {
         <div className="fixed inset-0 z-50 bg-gradient-to-br from-wedding-pink-50 via-white to-wedding-blue-50 transition-opacity duration-800"></div>
       )}
 
+      {/* Fixed Background */}
+      {imagesLoaded && isEnvelopeOpened && (
+        <div
+          className="fixed inset-0"
+          style={{
+            backgroundImage: `url('https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/flowers%20bg.png')`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "150px 200px",
+            backgroundPosition: "center",
+            zIndex: -2,
+          }}
+        />
+      )}
+
+      {/* Background Overlay */}
+      {imagesLoaded && isEnvelopeOpened && (
+        <div
+          className="fixed inset-0 bg-vintage-cream/80"
+          style={{
+            zIndex: -1,
+          }}
+        />
+      )}
+
       {/* Main Wedding Invitation Content - Pre-loaded but hidden until envelope opens */}
       {imagesLoaded && (
         <div
-          className={`min-h-screen bg-vintage-cream ${
-            isEnvelopeOpened ? "animate-fade-in-up" : "invisible fixed -z-10"
+          className={`min-h-screen ${
+            isEnvelopeOpened ? "relative animate-fade-in-up" : "invisible fixed inset-0 -z-50"
           }`}
         >
           <Header />

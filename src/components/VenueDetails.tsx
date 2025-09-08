@@ -11,13 +11,6 @@ export const VenueDetails = () => {
         isVenueVisible ? "visible" : ""
       }`}
     >
-      {/* Decorative Border Frame */}
-      <img
-        src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/border%204.png"
-        alt="Decorative border"
-        className="absolute top-0 left-0 w-40 h-40 object-contain z-10"
-      />
-
       <div className="absolute top-16 right-12 opacity-20">
         <Heart className="w-12 h-12 text-wedding-blue-400 transform -rotate-45" />
       </div>

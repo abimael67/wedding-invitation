@@ -27,7 +27,7 @@ export const Timeline = () => {
   ];
 
   return (
-    <section className="py-16 px-4 relative">
+    <section className="py-8 px-4 relative">
       {/* Decorative elements */}
       <div className="absolute top-8 right-8 opacity-15">
         <Heart className="w-14 h-14 text-wedding-blue-300 transform rotate-12" />
@@ -51,13 +51,16 @@ export const Timeline = () => {
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
           </div>
         </div>
-        <div className="relative" ref={timelineRef as React.RefObject<HTMLDivElement>}>
+        <div
+          className="relative"
+          ref={timelineRef as React.RefObject<HTMLDivElement>}
+        >
           <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-wedding-blue-300"></div>
           {timelineEvents.map((item, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`relative flex items-center mb-8 fade-in-section ${
-                isTimelineVisible ? 'visible' : ''
+                isTimelineVisible ? "visible" : ""
               }`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
