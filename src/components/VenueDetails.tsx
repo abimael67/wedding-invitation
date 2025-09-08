@@ -49,7 +49,9 @@ export const VenueDetails = () => {
                 <MapPin className="w-5 h-5 text-wedding-blue-600 mt-1" />
                 <div>
                   <p>Iglesia Adventista del Séptimo Día - Libertad</p>
-                  <p className="text-sm text-gray-600">Calle 1, #2, Santiago</p>
+                  <p className="text-sm text-gray-600">
+                    Calle 1, #4, Ensanche Libertad, Santiago
+                  </p>
                 </div>
               </div>
             </div>
