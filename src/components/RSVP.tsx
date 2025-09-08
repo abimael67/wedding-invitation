@@ -168,9 +168,9 @@ export const RSVP = () => {
                 {currentGuest.name}
               </h3>
               <h4 className="font-serif text-lg text-wedding-blue-900">
-                Para nosotros es un honor poder contar con su presencia en este
+                Para nosotros es un honor poder contar con tu presencia en este
                 evento que marcará el inicio de una nueva etapa en nuestras
-                vidas. Por favor, confirme su asistencia para prepararle un
+                vidas. Por favor, confirma tu asistencia para prepararte un
                 lugar especial.
               </h4>
             </div>
