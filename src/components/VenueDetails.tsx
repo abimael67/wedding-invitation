@@ -1,4 +1,4 @@
-import { Clock, MapPin, Heart } from "lucide-react";
+import { Clock, MapPin, Heart, Church, Martini } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export const VenueDetails = () => {
@@ -11,15 +11,13 @@ export const VenueDetails = () => {
         isVenueVisible ? "visible" : ""
       }`}
     >
-      <div className="absolute top-16 right-12 opacity-20">
-        <Heart className="w-12 h-12 text-wedding-blue-400 transform -rotate-45" />
-      </div>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex justify-center items-center mb-4">
-            <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
-            <Heart className="w-6 h-6 text-wedding-blue-400 mx-4" />
-            <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
+            <img
+              src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/cake.svg"
+              className="w-20 h-20 text-wedding-blue-400 mx-4"
+            />
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-wedding-blue-900">
             Detalles de la Boda
@@ -33,11 +31,11 @@ export const VenueDetails = () => {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Ceremony */}
           <div className="bg-white rounded-lg shadow-lg p-6 border-t-4 border-wedding-blue-400 relative overflow-hidden">
-            <div className="absolute top-2 right-2 opacity-10">
-              <Heart className="w-8 h-8 text-wedding-blue-300" />
+            <div className="absolute top-2 right-2 opacity-30">
+              <Church className="w-8 h-8 text-wedding-blue-300" />
             </div>
             <h3 className="font-serif text-2xl text-wedding-blue-800 mb-4 flex items-center">
-              <Heart className="w-6 h-6 text-wedding-blue-400 mr-2" />
+              <Church className="w-6 h-6 text-wedding-blue-400 mr-2" />
               Ceremonia
             </h3>
             <div className="space-y-3">
@@ -67,11 +65,11 @@ export const VenueDetails = () => {
 
           {/* Reception */}
           <div className="bg-white rounded-lg shadow-lg p-6 border-t-4 border-wedding-blue-400 relative overflow-hidden">
-            <div className="absolute top-2 right-2 opacity-10">
-              <Heart className="w-8 h-8 text-wedding-blue-300" />
+            <div className="absolute top-2 right-2 opacity-30">
+              <Martini className="w-8 h-8 text-wedding-blue-300" />
             </div>
             <h3 className="font-serif text-2xl text-wedding-blue-800 mb-4 flex items-center">
-              <Heart className="w-6 h-6 text-wedding-blue-400 mr-2" />
+              <Martini className="w-6 h-6 text-wedding-blue-400 mr-2" />
               Recepción
             </h3>
             <div className="space-y-3">

@@ -27,8 +27,6 @@ function App() {
   const [isEnvelopeOpened, setIsEnvelopeOpened] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-
-
   const playlist = [
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Rewrite-the-Stars-Piano-Instrumental.mp3",
     "https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/Yiruma-River-Flows-in-You.mp3",
@@ -280,9 +278,9 @@ function App() {
         <div
           className="fixed inset-0"
           style={{
-            backgroundImage: `url('https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/flowers%20bg.png')`,
+            backgroundImage: `url('https://gorkkdhtnfhtshupsxty.supabase.co/storage/v1/object/public/images/leaves.png')`,
             backgroundRepeat: "repeat",
-            backgroundSize: "150px 200px",
+            backgroundSize: "500px 500px",
             backgroundPosition: "center",
             zIndex: -2,
           }}
@@ -303,7 +301,9 @@ function App() {
       {imagesLoaded && (
         <div
           className={`min-h-screen ${
-            isEnvelopeOpened ? "relative animate-fade-in-up" : "invisible fixed inset-0 -z-50"
+            isEnvelopeOpened
+              ? "relative animate-fade-in-up"
+              : "invisible fixed inset-0 -z-50"
           }`}
         >
           <Header />

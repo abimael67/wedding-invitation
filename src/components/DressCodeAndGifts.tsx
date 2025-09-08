@@ -49,7 +49,7 @@ export const DressCodeAndGifts = () => {
                 <div className="flex items-center justify-center">
                   <span className="circle bg-wedding-blue-400 w-4 h-4 rounded-full inline-block mr-2"></span>
                   <span className="circle bg-wedding-blue-600 w-4 h-4 rounded-full inline-block mr-2"></span>
-                  <span className="circle bg-wedding-blue-900 w-4 h-4 rounded-full inline-block mr-2"></span>
+                  <span className="circle bg-wedding-blue-700 w-4 h-4 rounded-full inline-block mr-2"></span>
                 </div>
               </div>
             </div>
@@ -73,9 +73,11 @@ export const DressCodeAndGifts = () => {
                 Regalos
               </h3>
               <div className="flex justify-center items-center mt-4">
-                <div className="w-12 h-0.5 bg-wedding-blue-300"></div>
-                <Gift className="w-6 h-6 text-wedding-blue-400 mx-4" />
-                <div className="w-12 h-0.5 bg-wedding-blue-300"></div>
+                <img
+                  src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/gift.svg"
+                  className="w-16 h-auto"
+                  alt="Wedding Gift"
+                />
               </div>
             </div>
             <div className="space-y-4 text-wedding-blue-700 text-center">
