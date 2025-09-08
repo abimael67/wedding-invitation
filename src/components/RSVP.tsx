@@ -73,8 +73,8 @@ export const RSVP = () => {
     return null;
   }
   return (
-    <section className="py-8 px-4 bg-vintage-white relative">
-      <div className="absolute inset-0 bg-vintage-cream/80 pointer-events-none"></div>
+    <section className="py-8 px-4 relative">
+      <div className="absolute inset-0  pointer-events-none"></div>
       {/* Decorative elements */}
       <div className="absolute top-8 left-8 opacity-10 z-10">
         <Heart className="w-16 h-16 text-wedding-blue-300 transform rotate-45" />
@@ -224,7 +224,7 @@ export const RSVP = () => {
               type="submit"
               className="w-full bg-wedding-blue-600 text-white py-3 rounded-lg font-medium hover:bg-wedding-blue-700 transition-colors disabled:bg-wedding-blue-300 disabled:cursor-not-allowed"
             >
-              {submitting ? "Enviando..." : "Enviar RSVP"}
+              {submitting ? "Enviando..." : "Enviar Confirmación"}
             </button>
           </form>
         )}
