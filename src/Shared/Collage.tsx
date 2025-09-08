@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CollageProps {
   images: { id: number; src: string }[];
@@ -8,10 +8,14 @@ interface CollageProps {
 
 export const Collage = ({ images, className = "" }: CollageProps) => {
   const [selectedImage, setSelectedImage] = useState<{ id: number; src: string } | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [animationOrigin, setAnimationOrigin] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const openFullscreen = (image: { id: number; src: string }, event: React.MouseEvent<HTMLDivElement>) => {
+    const imageIndex = images.findIndex(img => img.id === image.id);
     const rect = event.currentTarget.getBoundingClientRect();
     setAnimationOrigin({
       x: rect.left,
@@ -21,9 +25,22 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
     });
     setIsAnimating(true);
     setSelectedImage(image);
+    setCurrentImageIndex(imageIndex);
     
     // Remove animation class after animation completes
     setTimeout(() => setIsAnimating(false), 300);
+  };
+
+  const goToNextImage = () => {
+    const nextIndex = (currentImageIndex + 1) % images.length;
+    setCurrentImageIndex(nextIndex);
+    setSelectedImage(images[nextIndex]);
+  };
+
+  const goToPreviousImage = () => {
+    const prevIndex = currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1;
+    setCurrentImageIndex(prevIndex);
+    setSelectedImage(images[prevIndex]);
   };
 
   const closeFullscreen = () => {
@@ -55,6 +72,33 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
       closeFullscreen();
+    } else if (e.key === "ArrowRight") {
+      goToNextImage();
+    } else if (e.key === "ArrowLeft") {
+      goToPreviousImage();
+    }
+  };
+
+  // Touch event handlers for swipe gestures
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNextImage();
+    } else if (isRightSwipe) {
+      goToPreviousImage();
     }
   };
 
@@ -107,6 +151,9 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
           }`}
           onClick={handleBackdropClick}
           onKeyDown={handleKeyDown}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           tabIndex={0}
           role="dialog"
           aria-modal="true"
@@ -120,6 +167,26 @@ export const Collage = ({ images, className = "" }: CollageProps) => {
           >
             <X className="w-8 h-8" />
           </button>
+
+          {/* Navigation Buttons */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={goToPreviousImage}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-10 bg-black/30 rounded-full p-2 hover:bg-black/50"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+              <button
+                onClick={goToNextImage}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-10 bg-black/30 rounded-full p-2 hover:bg-black/50"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+            </>
+          )}
 
           {/* Fullscreen Image */}
           <div className="w-full h-full flex items-center justify-center">

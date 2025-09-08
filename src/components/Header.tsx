@@ -122,7 +122,7 @@ export const Header = () => {
                 <img
                   src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_2827.jpg"
                   alt="Wedding"
-                  className=" h-[350px] "
+                  className=" h-[350px] w-auto object-cover"
                 />
                 <div className="h-[40px] w-full bg-white absolute bottom-0"></div>
               </div>
@@ -130,7 +130,7 @@ export const Header = () => {
                 <img
                   src="https://ittjdadhzzieregopwba.supabase.co/storage/v1/object/public/imagenes_torneo/wedding/session/DSC_3214.jpg"
                   alt="Wedding"
-                  className=" h-[350px] "
+                  className=" h-[350px] w-[300px] object-cover"
                 />
                 <div className="h-[40px] w-full bg-white absolute bottom-0"></div>
               </div>

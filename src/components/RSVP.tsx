@@ -82,7 +82,7 @@ export const RSVP = () => {
       <div className="absolute bottom-8 right-8 opacity-10 z-10">
         <Heart className="w-12 h-12 text-wedding-blue-400 transform -rotate-12" />
       </div>
-      <div className="max-w-2xl mx-auto relative z-10">
+      <div className="max-w-2xl mx-auto relative z-1">
         <div className="text-center mb-8">
           <div className="flex justify-center items-center mb-4">
             <div className="w-16 h-0.5 bg-wedding-blue-300"></div>
