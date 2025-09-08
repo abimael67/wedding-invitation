@@ -18,7 +18,7 @@ export const Timeline = () => {
       icon: Car,
     },
     { time: "4:30 PM", event: "Cóctel de bienvenida", icon: GlassWater },
-    { time: "5:00 PM", event: "Inicia celebración", icon: PartyPopperIcon },
+    { time: "5:00 PM", event: "Inicia la celebración", icon: PartyPopperIcon },
     {
       time: "9:00 PM",
       event: "Despedida, agradecimientos y cierre",
