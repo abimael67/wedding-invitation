@@ -78,7 +78,7 @@ export class GuestService {
       attending: rsvpData.attending,
       pax: rsvpData.pax,
       message: rsvpData.message,
-      answered_on: new Date().toLocaleString(),
+      answered_on: new Date().toISOString(),
     };
 
     const { data, error } = await supabase
