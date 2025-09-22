@@ -59,15 +59,22 @@ export const RSVP = () => {
     }
 
     try {
-      submitRSVP({
+      const { success, error } = await submitRSVP({
         attending: rsvpForm.attending === "yes",
         pax: Number(rsvpForm.pax),
         message: rsvpForm.message,
       });
+
+      if (!success) {
+        alert("Error submitting RSVP: " + error?.message);
+        throw new Error(error?.message || "Error submitting RSVP");
+      } else {
+        setResponseSent(true);
+      }
     } catch (error) {
+      alert("Error submitting RSVP: " + error);
       console.error("Error submitting RSVP:", error);
     }
-    setResponseSent(true);
   };
   if (!currentGuest) {
     return null;
