@@ -106,17 +106,16 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
                   (1 -
                     (() => {
                       const weddingDate = new Date("2025-11-02T00:00:00");
-                      const yesterday = new Date();
-                      yesterday.setDate(yesterday.getDate() - 1);
-                      yesterday.setHours(0, 0, 0, 0);
+                      const startDate = new Date("2025-09-10T00:00:00");
                       const now = new Date();
 
-                      const totalTime =
-                        weddingDate.getTime() - yesterday.getTime();
-                      const elapsedTime = now.getTime() - yesterday.getTime();
+                      const totalTime = weddingDate.getTime() - startDate.getTime();
+                      const elapsedTime = now.getTime() - startDate.getTime();
+                      const progress = Math.min(Math.max(elapsedTime / totalTime, 0), 1);
 
-                      return Math.min(Math.max(elapsedTime / totalTime, 0), 1);
-                    })())
+                      return progress;
+                    })()
+                  )
                 }`}
                 className="transition-all duration-1000 ease-out"
                 style={{
