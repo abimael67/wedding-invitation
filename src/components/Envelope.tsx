@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail } from "lucide-react";
+import { Church, Mail, PartyPopper } from "lucide-react";
 import imagesUrl from "../data/imagesUrl.json";
 import { useGuestContext } from "../hooks/useGuestContext";
 const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
@@ -16,7 +16,7 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
           </div>
         )}
         <div className="relative mb-4">
-          <div className="w-80 h-60 relative">
+          <div className="w-80 h-60 relative mx-auto">
             <div className="absolute inset-0 bg-gradient-to-br from-wedding-blue-300 to-wedding-blue-500 border-2 border-wedding-blue-200 rounded-lg shadow-2xl transform transition-all duration-500 hover:scale-105">
               <div className=" ">
                 <div className="text-xl text-wedding-blue-900">Mesa</div>
@@ -59,6 +59,34 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
             style={{ animationDelay: "0.5s" }}
           ></div>
         </button>
+        <br />
+
+        <a
+          href="https://www.google.com/maps/place/Iglesia+Adventista+Del+7mo+D%C3%ADa+Libertad/@19.4857117,-70.7224775,839m/data=!3m1!1e3!4m14!1m7!3m6!1s0x8eb1c6747ea5223d:0x70aa2edbb4262db1!2sIglesia+Adventista+Del+7mo+D%C3%ADa+Libertad!8m2!3d19.4855856!4d-70.7224636!16s%2Fg%2F1s04bxkmv!3m5!1s0x8eb1c6747ea5223d:0x70aa2edbb4262db1!8m2!3d19.4855856!4d-70.7224636!16s%2Fg%2F1s04bxkmv?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+          className="mt-4 text-wedding-blue-600 hover:text-wedding-blue-800 font-medium inline-block"
+        >
+          <span className="relative z-10 flex items-center justify-center">
+            <Church
+              className={`w-5 h-5 mr-2 transition-transform duration-300 ${
+                isHovered ? "rotate-12" : ""
+              }`}
+            />
+            Ver ubicación de ceremonia
+          </span>
+        </a>
+        <a
+          href="https://www.google.com/maps/place/Urbanizaci%C3%B3n+Vista+Loma/@19.4907108,-70.6880853,839m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8eb1c5007a8840d9:0xb8fc7c83d9036a52!8m2!3d19.4907108!4d-70.6855104!16s%2Fg%2F11vm5ny591?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+          className="mt-2 text-wedding-blue-600 hover:text-wedding-blue-800 font-medium inline-block"
+        >
+          <span className="relative z-10 flex items-center justify-center">
+            <PartyPopper
+              className={`w-5 h-5 mr-2 transition-transform duration-300 ${
+                isHovered ? "rotate-12" : ""
+              }`}
+            />
+            Ver ubicación de recepción
+          </span>
+        </a>
 
         {currentGuest && (
           <p className="text-sm text-gray-600 mt-8 italic">
