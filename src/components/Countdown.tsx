@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Calendar } from "lucide-react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
@@ -6,42 +5,8 @@ interface CountdownProps {
   onAddToCalendar: () => void;
 }
 
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
 export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
-  const weddingDate = new Date("2025-11-02T15:00:00");
   const [countdownRef, isCountdownVisible] = useScrollAnimation();
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = weddingDate.getTime() - now;
-
-      if (distance > 0) {
-        setTimeLeft({
-          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          ),
-          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000),
-        });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [weddingDate]);
 
   return (
     <section
@@ -61,7 +26,7 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
             {/* Minimalistic Sign */}
             <div className="bg-vintage-cream border-2 border-wedding-blue-300 rounded-lg shadow-lg px-6 py-3">
               <h2 className="font-serif text-2xl md:text-3xl text-wedding-blue-800 font-semibold text-center">
-                Cuenta Regresiva
+                <span>Es hoy!!!</span>
               </h2>
             </div>
           </div>
@@ -99,24 +64,7 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
                 fill="none"
                 strokeLinecap="round"
                 strokeDasharray={`${2 * Math.PI * 45}`}
-                strokeDashoffset={`${
-                  2 *
-                  Math.PI *
-                  45 *
-                  (1 -
-                    (() => {
-                      const weddingDate = new Date("2025-11-02T00:00:00");
-                      const startDate = new Date("2025-09-10T00:00:00");
-                      const now = new Date();
-
-                      const totalTime = weddingDate.getTime() - startDate.getTime();
-                      const elapsedTime = now.getTime() - startDate.getTime();
-                      const progress = Math.min(Math.max(elapsedTime / totalTime, 0), 1);
-
-                      return progress;
-                    })()
-                  )
-                }`}
+                strokeDashoffset="0"
                 className="transition-all duration-1000 ease-out"
                 style={{
                   filter: "drop-shadow(0 0 8px rgba(255,255,255,0.5))",
@@ -128,30 +76,7 @@ export const Countdown = ({ onAddToCalendar }: CountdownProps) => {
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold mb-2">
-                  {timeLeft.days}
-                </div>
-                <div className="text-lg uppercase tracking-wide mb-4">
-                  Días Restantes
-                </div>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <div className="text-xl font-semibold">
-                      {timeLeft.hours}
-                    </div>
-                    <div className="text-xs opacity-80">Horas</div>
-                  </div>
-                  <div>
-                    <div className="text-xl font-semibold">
-                      {timeLeft.minutes}
-                    </div>
-                    <div className="text-xs opacity-80">Minutos</div>
-                  </div>
-                  <div>
-                    <div className="text-xl font-semibold">
-                      {timeLeft.seconds}
-                    </div>
-                    <div className="text-xs opacity-80">Segundos</div>
-                  </div>
+                  Es hoy, es HOY!
                 </div>
               </div>
             </div>
