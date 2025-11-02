@@ -6,37 +6,27 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { currentGuest } = useGuestContext();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-wedding-blue-50 via-vintage-white to-wedding-blue-100 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-wedding-blue-50 via-vintage-white to-wedding-blue-100 flex items-center justify-center p-2 relative overflow-hidden">
       <div className="text-center max-w-md mx-auto">
         {currentGuest && (
           <div>
-            <h1 className="text-4xl font-bold font-handwriting text-wedding-blue-800 mb-8 writing-text">
+            <h1 className="text-4xl font-bold font-handwriting text-wedding-blue-800 mb-2 writing-text">
               {currentGuest?.name}
             </h1>
-            <h3 className="text-lg font-serif text-wedding-blue-800 mb-4">
-              Sus manos
-            </h3>
           </div>
         )}
-        {/* Envelope illustration */}
-        <div className="relative mb-8">
-          <div className="w-80 h-56 mx-auto relative">
-            {/* Envelope body */}
-            <div className="absolute inset-0 bg-gradient-to-br from-wedding-blue-100 to-wedding-blue-500 border-2 border-wedding-blue-200 rounded-lg shadow-2xl transform transition-all duration-500 hover:scale-105">
-              {/* Envelope flap */}
-              <div
-                className="absolute -top-1 left-0 right-0 h-20 bg-gradient-to-br from-wedding-blue-100 to-wedding-blue-200 transform origin-bottom transition-transform duration-700 hover:-rotate-12"
-                style={{
-                  clipPath: "polygon(0 100%, 50% 0, 100% 100%)",
-                }}
-              ></div>
-
-              {/* Envelope content preview */}
-              <div className=" absolute bottom-4 left-4 right-4 text-center">
+        <div className="relative mb-4">
+          <div className="w-80 h-60 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-wedding-blue-300 to-wedding-blue-500 border-2 border-wedding-blue-200 rounded-lg shadow-2xl transform transition-all duration-500 hover:scale-105">
+              <div className=" ">
+                <div className="text-xl text-wedding-blue-900">Mesa</div>
+                <div className="font-handwriting text-8xl text-wedding-blue-900 mt-10 underline">
+                  {currentGuest?.table_number}
+                </div>
                 <img
                   src={imagesUrl.logo}
                   alt="Invitación de Boda"
-                  className="w-16 h-16 mx-auto mb-2"
+                  className="w-12 h-12 mx-auto mb-2 absolute bottom-2 right-4"
                 />
               </div>
             </div>
@@ -48,7 +38,7 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
           onClick={setEnvelopeOpened}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="group relative px-8 py-4 bg-gradient-to-r from-wedding-blue-600 to-wedding-blue-700 text-white font-semibold text-lg rounded-full shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-wedding-blue-300"
+          className="group relative px-8 py-2 bg-gradient-to-r from-wedding-blue-600 to-wedding-blue-700 text-white font-semibold text-md rounded-full shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-wedding-blue-300"
         >
           <span className="relative z-10 flex items-center justify-center">
             <Mail
@@ -56,7 +46,7 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
                 isHovered ? "rotate-12" : ""
               }`}
             />
-            Abrir Invitación
+            Ver Invitación
           </span>
 
           {/* Button glow effect */}
@@ -70,16 +60,10 @@ const Envelope = ({ setEnvelopeOpened }: { setEnvelopeOpened: () => void }) => {
           ></div>
         </button>
 
-        {/* Decorative elements */}
-        <div className="mt-8 flex justify-center items-center space-x-4">
-          <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-wedding-blue-300"></div>
-
-          <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-wedding-blue-300"></div>
-        </div>
         {currentGuest && (
           <p className="text-sm text-gray-600 mt-8 italic">
-            Invitación válida para {currentGuest?.maxPax}{" "}
-            {currentGuest?.maxPax === 1 ? "persona" : "personas"}
+            Asientos para {currentGuest?.pax}{" "}
+            {currentGuest?.pax === 1 ? "persona" : "personas"}
           </p>
         )}
         {!currentGuest && (
